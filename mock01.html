@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Mains Mastery Quiz 2026 Reasoning (Day-01) Quiz | MockTest</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --bg: #f3f4f6;
+    --card-bg: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --marked: #7c3aed;
+    --correct-bg: #ecfdf3;
+    --wrong-bg: #fef2f2;
+    --marked-bg: #f3e8ff;
+}
+
+/* Reset-ish */
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top left, #dbeafe, #eff6ff 40%, #f9fafb 80%);
+    color: var(--text);
+}
+
+/* Instruction header (brand only) */
+.brand-header {
+    background: linear-gradient(90deg, #0f172a, #111827);
+    color: #fff;
+    padding: 14px 16px;
+    text-align: center;
+}
+.brand-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+.brand-sub {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+/* Test header (only after start) */
+.header-test {
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-test.hidden {
+    display: none !important;
+}
+
+.header-test.show {
+    display: flex !important;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.header-subtitle {
+    font-size: 12px;
+    opacity: 0.9;
+}
+.header-right {
+    font-size: 12px;
+    text-align: right;
+}
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
+    font-size: 11px;
+}
+
+/* Layout */
+.main {
+    max-width: 1000px;
+    margin: 16px auto 28px;
+    padding: 0 12px;
+}
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    padding: 18px 16px 16px;
+}
+
+/* Instructions */
+#instructions-container {
+    display: block;
+}
+.instructions-layout {
+    display: flex;
+    gap: 16px;
+}
+.instructions-main {
+    flex: 1;
+}
+.instructions-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.instructions-list {
+    font-size: 14px;
+    margin-left: 16px;
+    margin-bottom: 12px;
+}
+.instructions-list li {
+    margin-bottom: 4px;
+}
+.instructions-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 10px 0 16px;
+}
+.instructions-summary-item {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #f9fafb;
+    padding: 8px;
+    font-size: 13px;
+}
+.instructions-summary-label {
+    font-size: 11px;
+    color: var(--muted);
+}
+.instructions-summary-value {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Instruction candidate box (right side) */
+.instructions-side {
+    width: 230px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #f1f5f9;
+    padding: 10px;
+    font-size: 13px;
+}
+.instructions-side-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.instructions-side-row {
+    margin-bottom: 4px;
+}
+.instructions-side-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+.instructions-side-value {
+    font-weight: 500;
+}
+
+/* Test layout */
+#quiz-container {
+    display: none;
+}
+
+.test-layout {
+    display: flex;
+    gap: 16px;
+}
+.test-main {
+    flex: 1;
+}
+.test-side {
+    width: 300px;
+}
+
+/* Question header */
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--muted);
+}
+.q-progress {
+    font-weight: 500;
+}
+.marks-info {
+    font-size: 12px;
+}
+.marks-info span {
+    margin-left: 8px;
+}
+.marks-pos {
+    color: var(--success);
+}
+.marks-neg {
+    color: var(--danger);
+}
+
+/* Question body */
+.question-body {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 12px 10px;
+    background: #f9fafb;
+    margin-bottom: 12px;
+    font-size: 17px;
+	line-height: 1.5;
+}
+.question-body p {
+    margin: 4px 0;
+}
+
+/* Options */
+.options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+}
+.option:hover {
+    background: #eff6ff;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+.option input {
+    margin-top: 3px;
+}
+.option-text {
+    font-size: 17px;
+	line-height: 1.4;
+}
+
+.question-body img,
+.option-text img,
+.solution-question img,
+.solution-text img,
+.solution-explanation img {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+
+    /* IMPORTANT: prevent huge images */
+    max-height: 450px;
+
+    object-fit: contain;
+    display: block;
+    margin: 12px auto;
+    border-radius: 8px;
+}
+
+/* Prevent image overflow */
+.question-body {
+    overflow-x: hidden;
+}
+
+/* ===== Prevent table overflow on small screens ===== */
+.question-body table,
+.solution-question table,
+.solution-text table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.solution-explanation {
+    max-width: 100%;
+    overflow-x: auto;   /* allow scroll, NOT crop */
+}
+.question-body table td,
+.question-body table th,
+.solution-text table td,
+.solution-text table th {
+    word-break: break-word;
+}
+
+/* Nav buttons */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.nav-left,
+.nav-right {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.btn {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease;
+}
+.btn:active {
+    transform: translateY(1px);
+}
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+}
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+.btn-secondary {
+    background: #e5e7eb;
+    color: #111827;
+}
+.btn-secondary:hover {
+    background: #d1d5db;
+}
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+/* Side panel (palette only during test) */
+.sidebar-card {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #f9fafb;
+    padding: 10px;
+    font-size: 12px;
+}
+
+/* Palette */
+.palette {
+    margin-top: 0;
+}
+.palette-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.palette-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.palette-item {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid #d1d5db;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.15s;
+}
+.palette-item:hover {
+    transform: scale(1.08);
+    border-color: #3b82f6;
+}
+.palette-item.current {
+    outline: 2px solid var(--primary);
+}
+
+/* Palette colors per your request */
+.palette-item.state-notVisited {
+    background: #9ca3af;  /* darker grey */
+    color: #ffffff;
+}
+.palette-item.state-notAnswered {
+    background: #ef4444;  /* red */
+    color: #ffffff;
+}
+.palette-item.state-answered {
+    background: #22c55e;  /* green */
+    color: #ffffff;
+}
+.palette-item.state-marked {
+    background: #8b5cf6;  /* strong purple */
+    color: #ffffff;
+}
+
+/* Palette legend */
+.palette-legend {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--muted);
+}
+.palette-legend-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+.legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+.legend-notVisited { background: #e5e7eb; }
+.legend-notAnswered { background: #fee2e2; border-color:#fecaca; }
+.legend-answered { background: #dcfce7; border-color:#bbf7d0; }
+.legend-marked { background: #e9d5ff; border-color:#c4b5fd; }
+
+/* Solutions page */
+#solutions-container {
+    display: none;
+}
+.solutions-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.solutions-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+.solution-item {
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+.solution-item:first-child {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+}
+.solution-question {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.solution-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+.solution-option {
+    display: flex;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #fff;
+}
+.solution-option.correct {
+    background: var(--correct-bg);
+    border-color: var(--success);
+}
+.solution-option.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--danger);
+}
+.solution-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+.solution-text {
+    flex: 1;
+    font-size: 13px;
+}
+.solution-explanation {
+    font-size: 13px;
+    background: #eef2ff;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.55);
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.overlay.hidden {
+    display: none !important;
+}
+
+.overlay.show {
+    display: flex !important;
+}
+
+.overlay-content {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    width: 94%;
+    max-width: 430px;
+    box-shadow: 0 26px 50px rgba(15,23,42,0.4);
+}
+.overlay-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+.overlay-body {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 8px 0 10px;
+}
+.overlay-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+.metric-card {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 8px;
+    background: #f9fafb;
+}
+.metric-label {
+    font-size: 11px;
+    color: var(--muted);
+}
+.metric-value {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+.overlay-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+/* Utils */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive: hide side panels & palette on phones */
+@media (max-width: 768px) {
+    .instructions-layout,
+    .test-layout {
+        flex-direction: column;
+    }
+    .instructions-side,
+    .test-side {
+        display: none;
+    }
+    .card {
+        padding: 16px 12px 14px;
+    }
+}
+
+/* >>> ADD NEW CODE BELOW <<< */
+
+/* Expand quiz layout width */
+.main {
+    max-width: 1400px !important;
+}
+
+/* Expand quiz card width */
+#quiz-container.card {
+    width: 100% !important;
+    padding: 20px !important;
+}
+
+/* Reduce left+right margin */
+.main {
+    margin: 10px auto !important;
+    padding: 0px 5px !important;
+}
+
+/* Ensure question+palette stay visible side by side */
+.test-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 16px;
+}
+
+/* Reduce question padding */
+.question-body {
+    padding: 12px !important;
+}
+
+/* Keep buttons in one row */
+.nav-bar {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+}
+
+.nav-left button,
+.nav-right button {
+    white-space: nowrap !important;
+}
+
+/* Medium screen adjustments */
+@media (max-width: 1100px) {
+    .test-layout {
+        display: block !important;
+    }
+    .test-side {
+        display: none !important;
+    }
+    #quiz-container.card {
+        padding: 10px !important;
+    }
+    .question-body {
+        font-size: 18px !important;
+    }
+    .btn {
+        font-size: 16px !important;
+    }
+}
+
+/* Small screen adjustments */
+@media (max-width: 600px) {
+    body {
+        font-size: 16px !important;
+    }
+    .btn {
+        padding: 10px 16px !important;
+        font-size: 15px !important;
+    }
+    .option-text {
+        font-size: 18px !important;
+    }
+	.question-body img,
+    .solution-explanation img {
+        max-height: 300px !important;
+    }
+}
+/* Buttons shown on desktop */
+.nav-right .btn-submit {
+    display: inline-flex;
+}
+
+/* Buttons shown on mobile */
+@media (max-width: 600px) {
+    .btn-submit {
+        display: none !important;
+    }
+
+    .btn-mark {
+        display: inline-flex !important;
+    }
+
+    .btn-clear {
+        display: inline-flex !important;
+    }
+
+    .btn-save {
+        display: inline-flex !important;
+    }
+
+    /* Change button labels visually */
+    .btn-mark::after {
+        content: "Mark";
+    }
+    .btn-clear::after {
+        content: "Clear";
+    }
+    .btn-save::after {
+        content: "Save & Next";
+    }
+
+    /* hide original text inside buttons */
+    .btn-mark span,
+    .btn-clear span,
+    .btn-save span {
+        display: none;
+    }
+
+    /* Make buttons larger and easier to tap */
+    .nav-left button,
+    .nav-right button {
+        padding: 14px 20px;
+        font-size: 18px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-test {
+        flex-wrap: wrap;
+        padding: 8px 10px;
+        gap: 6px;
+    }
+
+    .header-left {
+        flex: 1 1 100%;
+    }
+
+    .header-title {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .header-subtitle {
+        font-size: 11px;
+    }
+
+    .header-right {
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+    }
+
+    .badge {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+}
+/* ===== HAMBURGER MENU ===== */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+}
+
+/* ===== PALETTE DRAWER ===== */
+.palette-drawer {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    height: 100dvh; /* mobile safe height */
+    background: #ffffff;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+    z-index: 100;
+    padding: 12px;
+    transition: left 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.palette-drawer.open {
+    left: 0;
+}
+
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    z-index: 90;
+}
+
+.drawer-overlay.show {
+    display: block;
+}
+#palette-drawer-container {
+    flex: 0 0 auto;          
+    max-height: calc(100dvh - 170px); 
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Improve scroll on mobile */
+#palette-drawer-container::-webkit-scrollbar {
+    width: 6px;
+}
+#palette-drawer-container::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 6px;
+}
+/* Keep legend always visible */
+.palette-drawer .palette-legend {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+body.drawer-open {
+    overflow: hidden;
+}
+
+#free-test-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.75); /* darker, premium */
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px;
+}
+
+/* Card */
+#free-test-popup .overlay-content {
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px 18px 18px;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+#free-test-popup .overlay-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+#free-test-popup .overlay-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+    color: #0f172a;
+}
+
+/* Body */
+#free-test-popup .overlay-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #334155;
+    margin-top: 8px;
+}
+
+/* Highlight box */
+#free-test-popup .notice-box {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #7f1d1d;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Footer */
+#free-test-popup .overlay-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Button */
+#free-test-popup .btn {
+    padding: 12px 22px;
+    font-size: 15px;
+    border-radius: 999px;
+}
+
+/* ---------------- SMALL DEVICES ---------------- */
+@media (max-width: 480px) {
+    #free-test-popup .overlay-content {
+        padding: 16px 14px;
+        border-radius: 14px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    #free-test-popup .overlay-header h2 {
+        font-size: 18px;
+    }
+
+    #free-test-popup .overlay-body {
+        font-size: 13px;
+    }
+
+    #free-test-popup .overlay-footer {
+        justify-content: center;
+    }
+
+    #free-test-popup .btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 14px;
+		justify-content: center;
+		text-align: center;
+    }
+}
+
+/* ---------------- LARGE SCREENS ---------------- */
+@media (min-width: 1200px) {
+    #free-test-popup .overlay-content {
+        max-width: 580px;
+    }
+}
+
+.brand-sub a {
+    color: #38bdf8;            
+    text-decoration: none; 
+    font-weight: 600;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.brand-sub a:hover {
+    color: #7dd3fc; 
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+    .brand-sub a {
+        font-size: 12px;
+    }
+}
+#free-test-popup.hidden {
+    display: none !important;
+}
+
+.language-box {
+    margin: 14px 0 16px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: #f8fafc;
+}
+
+.language-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.language-select-wrapper {
+    position: relative;
+}
+
+#languageSelect {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+}
+
+/* Dropdown arrow */
+.language-select-wrapper::after {
+    content: "▾";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #64748b;
+    pointer-events: none;
+}
+
+#languageSelect:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56,189,248,0.25);
+}
+
+.language-warning {
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 8px;
+}
+
+/* Extra polish for small screens */
+@media (max-width: 480px) {
+    #languageSelect {
+        font-size: 16px; /* prevents iOS zoom */
+        padding: 14px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div id="drawer-overlay" class="drawer-overlay"></div>
+
+<div id="palette-drawer" class="palette-drawer">
+    <h3 style="margin:6px 0 10px;font-size:14px;">Question Palette</h3>
+
+    <div id="palette-drawer-container" class="palette-grid"></div>
+
+    <!-- LEGEND FOR MOBILE -->
+    <div class="palette-legend">
+        <div class="palette-legend-row">
+            <span class="legend-box legend-notVisited"></span> Not visited
+        </div>
+        <div class="palette-legend-row">
+            <span class="legend-box legend-notAnswered"></span> Not answered
+        </div>
+        <div class="palette-legend-row">
+            <span class="legend-box legend-answered"></span> Answered
+        </div>
+        <div class="palette-legend-row">
+            <span class="legend-box legend-marked"></span> Marked for review
+        </div>
+    </div>
+</div>
+
+<!-- INSTRUCTION HEADER (BRAND ONLY) -->
+<div id="instruction-header" class="brand-header">
+    <div class="brand-title">MockTest</div>
+    <div class="brand-sub">Made by <a href="https://t.me/Banking_exam_notes" target="_blank" rel="noopener">Banking Exam</a></div>
+</div>
+
+<!-- TEST HEADER (ONLY AFTER START) -->
+<div id="quiz-header" class="header-test hidden">
+    <button id="menu-btn" class="menu-btn">☰</button>
+    <div class="header-left">
+        <span class="header-title">Mains Mastery Quiz 2026 Reasoning (Day-01)</span>
+        <span class="header-subtitle">Single-correct MCQ • One question per screen</span>
+    </div>
+    <div class="header-right">
+        <span class="badge">Quiz Mode</span><br />
+        <span style="font-size: 11px;">Marks: +1 / −0.25</span><br />
+        <span id="timer-label" style="font-size: 11px;">Time: 00:00:00</span>
+    </div>
+</div>
+
+<div class="main">
+
+    <!-- INSTRUCTIONS SCREEN -->
+    <div class="card" id="instructions-container">
+        <div class="instructions-layout">
+            <div class="instructions-main">
+                <div class="instructions-title">Instructions</div>
+                <p style="font-size:14px;margin-bottom:6px;">
+                    Read the instructions carefully before starting. Once started, the timer will not stop.
+                </p>
+
+                <div class="instructions-summary">
+                    <div class="instructions-summary-item">
+                        <div class="instructions-summary-label">Total Questions</div>
+                        <div class="instructions-summary-value" id="inst-total-questions">21</div>
+                    </div>
+                    <div class="instructions-summary-item">
+                        <div class="instructions-summary-label">Marks / Q</div>
+                        <div class="instructions-summary-value">+1</div>
+                    </div>
+                    <div class="instructions-summary-item">
+                        <div class="instructions-summary-label">Negative</div>
+                        <div class="instructions-summary-value">−0.25</div>
+                    </div>
+                </div>
+
+                <ul class="instructions-list">
+                    <li>Each question has a single correct answer.</li>
+                    <li>Use the palette on the right to move between questions or sections.</li>
+                    <li>Use <strong>Mark for Review &amp; Next</strong> to mark questions you want to review later.</li>
+                    <li>You can submit the test anytime using the <strong>Submit</strong> button.</li>
+                </ul>
+				<div class="language-box">
+					<label for="languageSelect" class="language-title">
+						Select Test Language
+					</label>
+
+					<div class="language-select-wrapper">
+						<select id="languageSelect">
+							<option value="">-- Choose Language --</option>
+							<option value="en">English</option>
+							<option value="hi">हिन्दी</option>
+						</select>
+					</div>
+
+					<div class="language-warning hidden" id="language-warning">
+						⚠️ Please select a language to start the test
+					</div>
+				</div>
+                <button type="button" id="start-test-btn" class="btn btn-primary">Start Test</button>
+            </div>
+
+            <div class="instructions-side">
+                <div class="instructions-side-title">Details</div>
+                <div class="instructions-side-row">
+                    <div class="instructions-side-label">Canditate</div>
+                    <div class="instructions-side-value">Guest User</div>
+                </div>
+                <div class="instructions-side-row">
+                    <div class="instructions-side-label">Section</div>
+                    <div class="instructions-side-value" id="inst-section-name">Mains Mastery Quiz 2025 Reasoning (Day-60)</div>
+                </div>
+                <div class="instructions-side-row">
+                    <div class="instructions-side-label">Questions</div>
+                    <div class="instructions-side-value" id="inst-side-total">21</div>
+                </div>
+                <div class="instructions-side-row">
+                    <div class="instructions-side-label">Marks</div>
+                    <div class="instructions-side-value">+1 / −0.25</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div class="card" id="quiz-container">
+        <div class="test-layout">
+            <div class="test-main">
+                <div class="question-header">
+                    <div class="q-progress" id="q-progress">Question 1 of 21</div>
+                    <div class="marks-info">
+                        <span class="marks-pos">+1 mark</span>
+                        <span class="marks-neg">−0.25 negative</span>
+                    </div>
+                </div>
+                <div class="question-body" id="question-text"></div>
+                <div class="options-group" id="options-container"></div>
+
+                <div class="nav-bar">
+					<div class="nav-left">
+						<button class="btn btn-secondary" id="clear-btn">
+							<svg width="18" height="18" viewBox="0 0 24 24" class="btn-icon"><path d="M6 19L19 6" stroke="currentColor" stroke-width="2"/><path d="M6 6L19 19" stroke="currentColor" stroke-width="2"/></svg>
+							<span class="btn-text">Clear Response</span>
+						</button>
+						<button class="btn btn-secondary" id="mark-btn">
+							<svg width="18" height="18" viewBox="0 0 24 24" class="btn-icon"><path d="M6 3h12v18l-6-4-6 4V3z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+							<span class="btn-text">Mark for Review & Next</span>
+						</button>
+					</div>
+					<div class="nav-right">
+						<button class="btn btn-primary" id="next-btn">
+							<svg width="18" height="18" viewBox="0 0 24 24" class="btn-icon"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+							<span class="btn-text">Save & Next</span>
+						</button>
+						<button class="btn btn-danger" id="submit-btn">
+							<svg width="18" height="18" viewBox="0 0 24 24" class="btn-icon"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+							<span class="btn-text">Submit</span>
+						</button>
+					</div>
+				</div>
+
+            </div>
+
+            <aside class="test-side">
+                <div class="sidebar-card palette">
+                    <div class="palette-title">Question Palette</div>
+                    <div class="palette-grid" id="palette-container"></div>
+                    <div class="palette-legend">
+                        <div class="palette-legend-row">
+                            <span class="legend-box legend-notVisited"></span> Not visited
+                        </div>
+                        <div class="palette-legend-row">
+                            <span class="legend-box legend-notAnswered"></span> Not answered
+                        </div>
+                        <div class="palette-legend-row">
+                            <span class="legend-box legend-answered"></span> Answered
+                        </div>
+                        <div class="palette-legend-row">
+                            <span class="legend-box legend-marked"></span> Marked for review
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- SOLUTIONS SCREEN -->
+    <div class="card" id="solutions-container">
+        <div class="solutions-title">Solutions – Mains Mastery Quiz 2026 Reasoning (Day-01)</div>
+        <div class="solutions-sub">
+            Correct options are highlighted in <span style="color:var(--success);font-weight:600;">green</span>.
+            Your wrong selections (if any) are highlighted in <span style="color:var(--danger);font-weight:600;">red</span>.
+        </div>
+        <div id="solutions-list"></div>
+        <div style="margin-top:12px; display:flex; justify-content:flex-end; gap:8px;">
+            <button class="btn btn-secondary" id="solutions-back-btn">&larr; Back to Result</button>
+        </div>
+    </div>
+</div>
+
+<!-- RESULT OVERLAY -->
+<div class="overlay hidden" id="result-overlay">
+    <div class="overlay-content">
+        <div class="overlay-header">
+            <h2>Quiz Summary</h2>
+        </div>
+        <div class="overlay-body">
+            Here is your performance analytics for this test.
+        </div>
+        <div class="overlay-metrics">
+            <div class="metric-card">
+                <div class="metric-label">Total Marks</div>
+                <div class="metric-value" id="metric-marks">0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Correct Answers</div>
+                <div class="metric-value" id="metric-correct">0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Wrong Answers</div>
+                <div class="metric-value" id="metric-wrong">0</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Questions Attempted</div>
+                <div class="metric-value" id="metric-attempted">0</div>
+            </div>
+			<div class="metric-card">
+				<div class="metric-label">Accuracy</div>
+				<div class="metric-value" id="metric-accuracy">0%</div>
+			</div>
+			<div class="metric-card">
+				<div class="metric-label">Avg Time / Question</div>
+				<div class="metric-value" id="metric-avgtime">0</div>
+			</div>
+        </div>
+        <div class="overlay-footer">
+            <button class="btn btn-secondary" id="home-btn">Home</button>
+            <button class="btn btn-primary" id="view-solutions-btn">View Solutions</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let questions = [];
+let currentIndex = 0;
+let userAnswers = [];
+let questionStates = [];
+let timerInterval = null;
+
+
+const QUESTIONS_BY_LANGUAGE = {
+    en: [{"question": "<p><strong>Study the following information carefully and answer the below questions.</strong></p>\n<p>Eight persons – P, Q, R, S, T, U, V, and W are living in an eight storey building marked 1 to 8 from bottom to top respectively. Each floor has a different height between 10 and 45 ft. and the height of each floor is multiple of either 4 or 6 or both. All the information is not necessary in the same order.</p>\n<p>S lives five floors below the one whose floor height is 16ft. One person lives between S and the one whose floor height is 20ft. The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft. The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft. Q lives three floors above the one whose floor height is 24ft. The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W. The number of floors between U and T is the same as the number of floors between V and T. Not more than two floors are between P and the one whose height of floor is 42ft. The height of one of the floors above V is 28ft.</p><br><p><strong>Who among the following person lives between the one whose floor height is 42ft and W? </strong></p>\n<p><strong>I).</strong> The one whose floor height is 24ft. </p>\n<p><strong>II).</strong> U</p>\n<p><strong>III).</strong>The one whose floor height is 16ft.</p>", "options": ["<p>Both II and III</p>", "<p>None</p>", "<p>Both I and II</p>", "<p>Only III</p>", "<p>All I, II, and III</p>"], "correctIndex": 2, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>We have:</p>\n<p>All possible heights which is a common multiple of either 4 or 6 or both: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 and 44.</p>\n<p>Now, we have:</p>\n<ul>\n<li>S lives five floors below the one whose floor height is 16ft.</li>\n<li>One person lives between S and the one whose floor height is 20ft.</li>\n<li>The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft.</li>\n</ul>\n<p>That means, in case (1) S lives on floor number 1, in case (2) S lives on floor number 2.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>Again, we have:</p>\n<ul>\n<li>The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft.</li>\n</ul>\n<p>Since, such possible combination of height is (16, 30), (18, 32), and (30, 44).</p>\n<p>But the height of the floor of W is 30ft., thus only valid combination is (18, 32).</p>\n<ul>\n<li>Q lives three floors above the one whose floor height is 24ft.</li>\n<li>The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W.</li>\n</ul>\n<p>Since, at least one floor gap must be between S and the one whose height is 24ft.</p>\n<p>That means, in case (2) R lives in floor number 1, case (1) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p><strong>Case (1) is not valid as no possible position for R</strong>.</p>\n<p>Again, we have:</p>\n<ul>\n<li>The number of floors between U and T is the same as the number of floors between V and T.</li>\n</ul>\n<p>That means, in case (2) T lives on floor number 4, in case (2a) T lives on floor number 5.</p>\n<ul>\n<li>Not more than two floors are between P and the one whose height of floor is 42ft.</li>\n<li>The height of one of the floors above V is 28ft.</li>\n</ul>\n<p>That means, in case (2a) the height of the floor of S is 42ft, case (2) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p><strong>Case (2) is not valid as not more than two floors are between P and the one whose height of floor is 42ft</strong>.</p>\n<p><strong>Answer: C</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions.</strong></p>\n<p>Eight persons – P, Q, R, S, T, U, V, and W are living in an eight storey building marked 1 to 8 from bottom to top respectively. Each floor has a different height between 10 and 45 ft. and the height of each floor is multiple of either 4 or 6 or both. All the information is not necessary in the same order.</p>\n<p>S lives five floors below the one whose floor height is 16ft. One person lives between S and the one whose floor height is 20ft. The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft. The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft. Q lives three floors above the one whose floor height is 24ft. The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W. The number of floors between U and T is the same as the number of floors between V and T. Not more than two floors are between P and the one whose height of floor is 42ft. The height of one of the floors above V is 28ft.</p><br><p><strong>Which of the following persons are living above the one whose floor height is 24ft? </strong></p>\n<p><strong>I).</strong> The one whose floor height is 18ft.</p>\n<p><strong>II).</strong> U</p>\n<p><strong>III).</strong>The one whose floor height is 20ft.</p>", "options": ["<p>Only II</p>", "<p>None</p>", "<p>Both I and III</p>", "<p>Only III</p>", "<p>All I, II, and III</p>"], "correctIndex": 1, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>We have:</p>\n<p>All possible heights which is a common multiple of either 4 or 6 or both: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 and 44.</p>\n<p>Now, we have:</p>\n<ul>\n<li>S lives five floors below the one whose floor height is 16ft.</li>\n<li>One person lives between S and the one whose floor height is 20ft.</li>\n<li>The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft.</li>\n</ul>\n<p>That means, in case (1) S lives on floor number 1, in case (2) S lives on floor number 2.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>Again, we have:</p>\n<ul>\n<li>The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft.</li>\n</ul>\n<p>Since, such possible combination of height is (16, 30), (18, 32), and (30, 44).</p>\n<p>But the height of the floor of W is 30ft., thus only valid combination is (18, 32).</p>\n<ul>\n<li>Q lives three floors above the one whose floor height is 24ft.</li>\n<li>The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W.</li>\n</ul>\n<p>Since, at least one floor gap must be between S and the one whose height is 24ft.</p>\n<p>That means, in case (2) R lives in floor number 1, case (1) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p><strong>Case (1) is not valid as no possible position for R</strong>.</p>\n<p>Again, we have:</p>\n<ul>\n<li>The number of floors between U and T is the same as the number of floors between V and T.</li>\n</ul>\n<p>That means, in case (2) T lives on floor number 4, in case (2a) T lives on floor number 5.</p>\n<ul>\n<li>Not more than two floors are between P and the one whose height of floor is 42ft.</li>\n<li>The height of one of the floors above V is 28ft.</li>\n</ul>\n<p>That means, in case (2a) the height of the floor of S is 42ft, case (2) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p><strong>Case (2) is not valid as not more than two floors are between P and the one whose height of floor is 42ft</strong>.</p>\n<p><strong>Answer: B</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions.</strong></p>\n<p>Eight persons – P, Q, R, S, T, U, V, and W are living in an eight storey building marked 1 to 8 from bottom to top respectively. Each floor has a different height between 10 and 45 ft. and the height of each floor is multiple of either 4 or 6 or both. All the information is not necessary in the same order.</p>\n<p>S lives five floors below the one whose floor height is 16ft. One person lives between S and the one whose floor height is 20ft. The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft. The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft. Q lives three floors above the one whose floor height is 24ft. The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W. The number of floors between U and T is the same as the number of floors between V and T. Not more than two floors are between P and the one whose height of floor is 42ft. The height of one of the floors above V is 28ft.</p><br><p><strong>Who among the following person lives immediately below P?</strong></p>", "options": ["<p>The one who lives two floors above R</p>", "<p>T</p>", "<p>The one whose floor height is 16ft</p>", "<p>S</p>", "<p>None of these</p>"], "correctIndex": 0, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>We have:</p>\n<p>All possible heights which is a common multiple of either 4 or 6 or both: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 and 44.</p>\n<p>Now, we have:</p>\n<ul>\n<li>S lives five floors below the one whose floor height is 16ft.</li>\n<li>One person lives between S and the one whose floor height is 20ft.</li>\n<li>The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft.</li>\n</ul>\n<p>That means, in case (1) S lives on floor number 1, in case (2) S lives on floor number 2.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>Again, we have:</p>\n<ul>\n<li>The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft.</li>\n</ul>\n<p>Since, such possible combination of height is (16, 30), (18, 32), and (30, 44).</p>\n<p>But the height of the floor of W is 30ft., thus only valid combination is (18, 32).</p>\n<ul>\n<li>Q lives three floors above the one whose floor height is 24ft.</li>\n<li>The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W.</li>\n</ul>\n<p>Since, at least one floor gap must be between S and the one whose height is 24ft.</p>\n<p>That means, in case (2) R lives in floor number 1, case (1) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p><strong>Case (1) is not valid as no possible position for R</strong>.</p>\n<p>Again, we have:</p>\n<ul>\n<li>The number of floors between U and T is the same as the number of floors between V and T.</li>\n</ul>\n<p>That means, in case (2) T lives on floor number 4, in case (2a) T lives on floor number 5.</p>\n<ul>\n<li>Not more than two floors are between P and the one whose height of floor is 42ft.</li>\n<li>The height of one of the floors above V is 28ft.</li>\n</ul>\n<p>That means, in case (2a) the height of the floor of S is 42ft, case (2) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p><strong>Case (2) is not valid as not more than two floors are between P and the one whose height of floor is 42ft</strong>.</p>\n<p><strong>Answer: A</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions.</strong></p>\n<p>Eight persons – P, Q, R, S, T, U, V, and W are living in an eight storey building marked 1 to 8 from bottom to top respectively. Each floor has a different height between 10 and 45 ft. and the height of each floor is multiple of either 4 or 6 or both. All the information is not necessary in the same order.</p>\n<p>S lives five floors below the one whose floor height is 16ft. One person lives between S and the one whose floor height is 20ft. The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft. The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft. Q lives three floors above the one whose floor height is 24ft. The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W. The number of floors between U and T is the same as the number of floors between V and T. Not more than two floors are between P and the one whose height of floor is 42ft. The height of one of the floors above V is 28ft.</p><br><p><strong>Four of the following five are alike in a certain way as per the given arrangement and thus form a group, find the one that doesn’t belong to that group?</strong></p>", "options": ["<p>The one whose floor height is 30ft.</p>", "<p>V</p>", "<p>The one whose floor height is 18ft&nbsp;</p>", "<p>The one who lives three floors below Q</p>", "<p>U</p>"], "correctIndex": 0, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>We have:</p>\n<p>All possible heights which is a common multiple of either 4 or 6 or both: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 and 44.</p>\n<p>Now, we have:</p>\n<ul>\n<li>S lives five floors below the one whose floor height is 16ft.</li>\n<li>One person lives between S and the one whose floor height is 20ft.</li>\n<li>The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft.</li>\n</ul>\n<p>That means, in case (1) S lives on floor number 1, in case (2) S lives on floor number 2.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>Again, we have:</p>\n<ul>\n<li>The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft.</li>\n</ul>\n<p>Since, such possible combination of height is (16, 30), (18, 32), and (30, 44).</p>\n<p>But the height of the floor of W is 30ft., thus only valid combination is (18, 32).</p>\n<ul>\n<li>Q lives three floors above the one whose floor height is 24ft.</li>\n<li>The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W.</li>\n</ul>\n<p>Since, at least one floor gap must be between S and the one whose height is 24ft.</p>\n<p>That means, in case (2) R lives in floor number 1, case (1) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p><strong>Case (1) is not valid as no possible position for R</strong>.</p>\n<p>Again, we have:</p>\n<ul>\n<li>The number of floors between U and T is the same as the number of floors between V and T.</li>\n</ul>\n<p>That means, in case (2) T lives on floor number 4, in case (2a) T lives on floor number 5.</p>\n<ul>\n<li>Not more than two floors are between P and the one whose height of floor is 42ft.</li>\n<li>The height of one of the floors above V is 28ft.</li>\n</ul>\n<p>That means, in case (2a) the height of the floor of S is 42ft, case (2) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p><strong>Case (2) is not valid as not more than two floors are between P and the one whose height of floor is 42ft</strong>.</p>\n<p><strong>Answer: A</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions.</strong></p>\n<p>Eight persons – P, Q, R, S, T, U, V, and W are living in an eight storey building marked 1 to 8 from bottom to top respectively. Each floor has a different height between 10 and 45 ft. and the height of each floor is multiple of either 4 or 6 or both. All the information is not necessary in the same order.</p>\n<p>S lives five floors below the one whose floor height is 16ft. One person lives between S and the one whose floor height is 20ft. The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft. The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft. Q lives three floors above the one whose floor height is 24ft. The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W. The number of floors between U and T is the same as the number of floors between V and T. Not more than two floors are between P and the one whose height of floor is 42ft. The height of one of the floors above V is 28ft.</p><br><p><strong>How many persons are living above the one whose floor height is 20ft?</strong></p>\n<p><strong>I).</strong> As many persons living between R and W</p>\n<p><strong>II).</strong> As many persons living below U</p>\n<p><strong>III).</strong>As many persons living below T</p>", "options": ["<p>Both II and III</p>", "<p>None</p>", "<p>Both I and III</p>", "<p>Only III</p>", "<p>All I, II, and III</p>"], "correctIndex": 2, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>We have:</p>\n<p>All possible heights which is a common multiple of either 4 or 6 or both: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 and 44.</p>\n<p>Now, we have:</p>\n<ul>\n<li>S lives five floors below the one whose floor height is 16ft.</li>\n<li>One person lives between S and the one whose floor height is 20ft.</li>\n<li>The number of persons living below the one whose floor height is 20ft. is one more than the number of persons living above W, whose floor height is 30ft.</li>\n</ul>\n<p>That means, in case (1) S lives on floor number 1, in case (2) S lives on floor number 2.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>Again, we have:</p>\n<ul>\n<li>The height of the floor of R is 14ft less than the height of the floor of U, who lives immediately below the floor of the one whose floor height is 20ft.</li>\n</ul>\n<p>Since, such possible combination of height is (16, 30), (18, 32), and (30, 44).</p>\n<p>But the height of the floor of W is 30ft., thus only valid combination is (18, 32).</p>\n<ul>\n<li>Q lives three floors above the one whose floor height is 24ft.</li>\n<li>The number of persons living between the one whose floor height is 24ft and S is half of the number of floors between R and W.</li>\n</ul>\n<p>Since, at least one floor gap must be between S and the one whose height is 24ft.</p>\n<p>That means, in case (2) R lives in floor number 1, case (1) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p><strong>Case (1) is not valid as no possible position for R</strong>.</p>\n<p>Again, we have:</p>\n<ul>\n<li>The number of floors between U and T is the same as the number of floors between V and T.</li>\n</ul>\n<p>That means, in case (2) T lives on floor number 4, in case (2a) T lives on floor number 5.</p>\n<ul>\n<li>Not more than two floors are between P and the one whose height of floor is 42ft.</li>\n<li>The height of one of the floors above V is 28ft.</li>\n</ul>\n<p>That means, in case (2a) the height of the floor of S is 42ft, case (2) is not valid.</p>\n<p>Based on the above given information we have:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p><strong>Case (2) is not valid as not more than two floors are between P and the one whose height of floor is 42ft</strong>.</p>\n<p><strong>Answer: C</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the given questions. </strong></p>\n<p>Eight Chairs viz., Z, X, C, V, B, N, M and T are kept around a rectangular shaped room in such a way that three chairs are kept on each longer side with equidistance between each other and one chair is kept in the middle of each shorter side. All the chairs are facing the centre of the room. The perimeter of the room is 96m. The ratio of the length to breadth of the room is 3:1 respectively.</p>\n<p>The distance between chair Z and chair X is 24m. Chair X is not kept shorter side of the table. One chair is kept between chair Z and chair M. Chair T is kept third to the left of chair M. The distance between chair T and chair B is either 48m or 30m. The distance between chair N and chair V is 33m. Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</p><br><p><strong>What is the distance between Chair T and Chair M with respect to the final arrangement?</strong></p>", "options": ["<p>39m</p>", "<p>24m</p>", "<p>57m</p>", "<p>Either a or b</p>", "<p>Either a or c</p>"], "correctIndex": 4, "solution": "<p><strong>Final arrangement</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>We have,</p>\n<p>The perimeter of the rectangle is 96m.</p>\n<p>The perimeter of the rectangle formula= 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96m</li>\n<li>L + B= 96/2=48m</li>\n<li>The ratio between the length and breadth is 3:1</li>\n<li>3x+x=4x=48m</li>\n<li>X=12m</li>\n<li>Length(L) is 3x so 3*12 = 36m</li>\n<li>Breadth(B) is x so x= 12m</li>\n</ul>\n<ul>\n<li>The distance between the chair Z and chair X is 24m.</li>\n<li>Chair X is not kept shorter side of the table.</li>\n</ul>\n<p>From the above conditions, there are two possibilities</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>One chair is kept between chair Z and chair M.</li>\n<li>Chair T is kept third to the left of chair M.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The distance between chair T and chair B is either 48m or 30m.</li>\n<li>The distance between chair N and chair V is 33m.</li>\n<li>Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</li>\n</ul>\n<p>From the above conditions case 1 gets eliminated because Chair C is kept 15m right of chair V but not kept with chair M is not satisfied.</p>\n<p>Hence case 2 shows the final answer.</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>Answer: E</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the given questions. </strong></p>\n<p>Eight Chairs viz., Z, X, C, V, B, N, M and T are kept around a rectangular shaped room in such a way that three chairs are kept on each longer side with equidistance between each other and one chair is kept in the middle of each shorter side. All the chairs are facing the centre of the room. The perimeter of the room is 96m. The ratio of the length to breadth of the room is 3:1 respectively.</p>\n<p>The distance between chair Z and chair X is 24m. Chair X is not kept shorter side of the table. One chair is kept between chair Z and chair M. Chair T is kept third to the left of chair M. The distance between chair T and chair B is either 48m or 30m. The distance between chair N and chair V is 33m. Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</p><br><p><strong>The number of chairs kept between Chair N and Chair X, when counted from the right of chair N is one more than the number of chairs kept between __ and __.</strong></p>", "options": ["<p>Chair B and Chair T</p>", "<p>Chair M and Chair C</p>", "<p>Chair N and Chair V</p>", "<p>Chair Z and Chair B</p>", "<p>Chair X and Chair V</p>"], "correctIndex": 0, "solution": "<p><strong>Final arrangement</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>We have,</p>\n<p>The perimeter of the rectangle is 96m.</p>\n<p>The perimeter of the rectangle formula= 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96m</li>\n<li>L + B= 96/2=48m</li>\n<li>The ratio between the length and breadth is 3:1</li>\n<li>3x+x=4x=48m</li>\n<li>X=12m</li>\n<li>Length(L) is 3x so 3*12 = 36m</li>\n<li>Breadth(B) is x so x= 12m</li>\n</ul>\n<ul>\n<li>The distance between the chair Z and chair X is 24m.</li>\n<li>Chair X is not kept shorter side of the table.</li>\n</ul>\n<p>From the above conditions, there are two possibilities</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>One chair is kept between chair Z and chair M.</li>\n<li>Chair T is kept third to the left of chair M.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The distance between chair T and chair B is either 48m or 30m.</li>\n<li>The distance between chair N and chair V is 33m.</li>\n<li>Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</li>\n</ul>\n<p>From the above conditions case 1 gets eliminated because Chair C is kept 15m right of chair V but not kept with chair M is not satisfied.</p>\n<p>Hence case 2 shows the final answer.</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>Answer: A</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the given questions. </strong></p>\n<p>Eight Chairs viz., Z, X, C, V, B, N, M and T are kept around a rectangular shaped room in such a way that three chairs are kept on each longer side with equidistance between each other and one chair is kept in the middle of each shorter side. All the chairs are facing the centre of the room. The perimeter of the room is 96m. The ratio of the length to breadth of the room is 3:1 respectively.</p>\n<p>The distance between chair Z and chair X is 24m. Chair X is not kept shorter side of the table. One chair is kept between chair Z and chair M. Chair T is kept third to the left of chair M. The distance between chair T and chair B is either 48m or 30m. The distance between chair N and chair V is 33m. Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</p><br><p><strong>What is the difference between the sum of the distance between Chair B and Chair T and the sum of the distance between chair C and Chair Z, when counted from the right side of both chair B and chair C?</strong></p>", "options": ["<p>10m</p>", "<p>14m</p>", "<p>15m</p>", "<p>16m</p>", "<p>5m</p>"], "correctIndex": 2, "solution": "<p><strong>Final arrangement</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>We have,</p>\n<p>The perimeter of the rectangle is 96m.</p>\n<p>The perimeter of the rectangle formula= 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96m</li>\n<li>L + B= 96/2=48m</li>\n<li>The ratio between the length and breadth is 3:1</li>\n<li>3x+x=4x=48m</li>\n<li>X=12m</li>\n<li>Length(L) is 3x so 3*12 = 36m</li>\n<li>Breadth(B) is x so x= 12m</li>\n</ul>\n<ul>\n<li>The distance between the chair Z and chair X is 24m.</li>\n<li>Chair X is not kept shorter side of the table.</li>\n</ul>\n<p>From the above conditions, there are two possibilities</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>One chair is kept between chair Z and chair M.</li>\n<li>Chair T is kept third to the left of chair M.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The distance between chair T and chair B is either 48m or 30m.</li>\n<li>The distance between chair N and chair V is 33m.</li>\n<li>Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</li>\n</ul>\n<p>From the above conditions case 1 gets eliminated because Chair C is kept 15m right of chair V but not kept with chair M is not satisfied.</p>\n<p>Hence case 2 shows the final answer.</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>Answer: C</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the given questions. </strong></p>\n<p>Eight Chairs viz., Z, X, C, V, B, N, M and T are kept around a rectangular shaped room in such a way that three chairs are kept on each longer side with equidistance between each other and one chair is kept in the middle of each shorter side. All the chairs are facing the centre of the room. The perimeter of the room is 96m. The ratio of the length to breadth of the room is 3:1 respectively.</p>\n<p>The distance between chair Z and chair X is 24m. Chair X is not kept shorter side of the table. One chair is kept between chair Z and chair M. Chair T is kept third to the left of chair M. The distance between chair T and chair B is either 48m or 30m. The distance between chair N and chair V is 33m. Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</p><br><p><strong>Which among the following statement is not true with respect to both chair Z and chair B? </strong></p>\n<p><strong>I).</strong> Chair V is kept 33m to the left of chair B</p>\n<p><strong>II).</strong> Chair Z is kept second to the left of chair M</p>\n<p><strong>III). </strong>The distance between chair B and chair Z is 33m, when counted from the left of chair B</p>", "options": ["<p>Only III</p>", "<p>Only I and II</p>", "<p>Only II and III</p>", "<p>Only I</p>", "<p>All I, II, and III</p>"], "correctIndex": 3, "solution": "<p><strong>Final arrangement</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>We have,</p>\n<p>The perimeter of the rectangle is 96m.</p>\n<p>The perimeter of the rectangle formula= 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96m</li>\n<li>L + B= 96/2=48m</li>\n<li>The ratio between the length and breadth is 3:1</li>\n<li>3x+x=4x=48m</li>\n<li>X=12m</li>\n<li>Length(L) is 3x so 3*12 = 36m</li>\n<li>Breadth(B) is x so x= 12m</li>\n</ul>\n<ul>\n<li>The distance between the chair Z and chair X is 24m.</li>\n<li>Chair X is not kept shorter side of the table.</li>\n</ul>\n<p>From the above conditions, there are two possibilities</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>One chair is kept between chair Z and chair M.</li>\n<li>Chair T is kept third to the left of chair M.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The distance between chair T and chair B is either 48m or 30m.</li>\n<li>The distance between chair N and chair V is 33m.</li>\n<li>Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</li>\n</ul>\n<p>From the above conditions case 1 gets eliminated because Chair C is kept 15m right of chair V but not kept with chair M is not satisfied.</p>\n<p>Hence case 2 shows the final answer.</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>Answer: D</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the given questions. </strong></p>\n<p>Eight Chairs viz., Z, X, C, V, B, N, M and T are kept around a rectangular shaped room in such a way that three chairs are kept on each longer side with equidistance between each other and one chair is kept in the middle of each shorter side. All the chairs are facing the centre of the room. The perimeter of the room is 96m. The ratio of the length to breadth of the room is 3:1 respectively.</p>\n<p>The distance between chair Z and chair X is 24m. Chair X is not kept shorter side of the table. One chair is kept between chair Z and chair M. Chair T is kept third to the left of chair M. The distance between chair T and chair B is either 48m or 30m. The distance between chair N and chair V is 33m. Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</p><br><p><strong>What is the difference between the diagonal of the rectangular room and the distance between Chair X and Chair M (consider the diagonal value as approximately)?</strong></p>", "options": ["<p>12m</p>", "<p>10m</p>", "<p>13m</p>", "<p>15m</p>", "<p>9m</p>"], "correctIndex": 1, "solution": "<p><strong>Final arrangement</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>We have,</p>\n<p>The perimeter of the rectangle is 96m.</p>\n<p>The perimeter of the rectangle formula= 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96m</li>\n<li>L + B= 96/2=48m</li>\n<li>The ratio between the length and breadth is 3:1</li>\n<li>3x+x=4x=48m</li>\n<li>X=12m</li>\n<li>Length(L) is 3x so 3*12 = 36m</li>\n<li>Breadth(B) is x so x= 12m</li>\n</ul>\n<ul>\n<li>The distance between the chair Z and chair X is 24m.</li>\n<li>Chair X is not kept shorter side of the table.</li>\n</ul>\n<p>From the above conditions, there are two possibilities</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>One chair is kept between chair Z and chair M.</li>\n<li>Chair T is kept third to the left of chair M.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The distance between chair T and chair B is either 48m or 30m.</li>\n<li>The distance between chair N and chair V is 33m.</li>\n<li>Chair C is kept 15m to the right of chair V but not kept adjacent to chair M.</li>\n</ul>\n<p>From the above conditions case 1 gets eliminated because Chair C is kept 15m right of chair V but not kept with chair M is not satisfied.</p>\n<p>Hence case 2 shows the final answer.</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>Answer: B</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the questions given below</strong></p>\n<p>Ten persons-A, B, C, D, E, F, G, H, I and J are sitting around a pentagon table in such a way that one person sits on each corner and faces the centre while one person sits in the middle of each side and faces away from the centre. Each ordered different dishes- roti, Nan, Noodles, Fried rice, Biryani, Burger, Pasta, Pizza, Sandwich and Chapatti. All the information is not necessarily in the same order.</p>\n<p>G sits third to the right of the one who ordered sandwich. Two persons sit between G and J. C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich. Neither J nor H ordered sandwich and pizza. The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H. The one who ordered pizza sits three places away from H. The one who ordered Roti doesn’t sit at the side. As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich. The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A. D sits second to the left of B and third to the right of the one who ordered pasta. The one who ordered Chapatti doesn’t sit in the corner. One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.</p><br><p><strong>Who among the following person sits immediate right of the one who ordered Chapatti?</strong></p>", "options": ["<p>The one who ordered roti.</p>", "<p>The one who ordered fried rice</p>", "<p>E</p>", "<p>The one who sits opposite to the one who ordered Pizza</p>", "<p>Both a and d</p>"], "correctIndex": 0, "solution": "<p>We have,</p>\n<ul>\n<li>G sits third to the right of the one who ordered sandwich.</li>\n<li>Two persons sit between G and J.</li>\n<li>C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich.</li>\n<li>Neither J nor H ordered sandwich and pizza.</li>\n</ul>\n<p>From the above conditions, we have two possibilities:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H.</li>\n<li>The one who ordered Roti doesn’t sit at the side.</li>\n<li>As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich.</li>\n<li>The one who ordered pizza sits three places away from H.</li>\n<li>The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>D sits second to the left of B and third to the right of the one who ordered pasta.</li>\n<li>The one who ordered Chapatti doesn’t sit in the corner.</li>\n<li>One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.(While applying this condition, case 1a gets eliminated)</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>Thus, case 1 gives the final arrangement.</p>\n<p><strong>Answer: A</strong></p>\n<p> </p>"}, {"question": "<p><strong>Study the following information carefully and answer the questions given below</strong></p>\n<p>Ten persons-A, B, C, D, E, F, G, H, I and J are sitting around a pentagon table in such a way that one person sits on each corner and faces the centre while one person sits in the middle of each side and faces away from the centre. Each ordered different dishes- roti, Nan, Noodles, Fried rice, Biryani, Burger, Pasta, Pizza, Sandwich and Chapatti. All the information is not necessarily in the same order.</p>\n<p>G sits third to the right of the one who ordered sandwich. Two persons sit between G and J. C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich. Neither J nor H ordered sandwich and pizza. The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H. The one who ordered pizza sits three places away from H. The one who ordered Roti doesn’t sit at the side. As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich. The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A. D sits second to the left of B and third to the right of the one who ordered pasta. The one who ordered Chapatti doesn’t sit in the corner. One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.</p><br><p><strong>If the amount paid by the persons sitting in the corner is Rs.210/ person and the others paid Rs.250/person, then what is the sum of the amount paid by the one who sits second to the right of the one who ordered Pasta and the persons sitting adjacent to F?</strong></p>", "options": ["<p>Rs.650</p>", "<p>Rs.670</p>", "<p>Rs.710</p>", "<p>Rs.750</p>", "<p>Rs.630</p>"], "correctIndex": 1, "solution": "<p>We have,</p>\n<ul>\n<li>G sits third to the right of the one who ordered sandwich.</li>\n<li>Two persons sit between G and J.</li>\n<li>C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich.</li>\n<li>Neither J nor H ordered sandwich and pizza.</li>\n</ul>\n<p>From the above conditions, we have two possibilities:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H.</li>\n<li>The one who ordered Roti doesn’t sit at the side.</li>\n<li>As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich.</li>\n<li>The one who ordered pizza sits three places away from H.</li>\n<li>The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>D sits second to the left of B and third to the right of the one who ordered pasta.</li>\n<li>The one who ordered Chapatti doesn’t sit in the corner.</li>\n<li>One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.(While applying this condition, case 1a gets eliminated)</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>Thus, case 1 gives the final arrangement.</p>\n<p><strong>Answer: B</strong></p>\n<p> </p>"}, {"question": "<p><strong>Study the following information carefully and answer the questions given below</strong></p>\n<p>Ten persons-A, B, C, D, E, F, G, H, I and J are sitting around a pentagon table in such a way that one person sits on each corner and faces the centre while one person sits in the middle of each side and faces away from the centre. Each ordered different dishes- roti, Nan, Noodles, Fried rice, Biryani, Burger, Pasta, Pizza, Sandwich and Chapatti. All the information is not necessarily in the same order.</p>\n<p>G sits third to the right of the one who ordered sandwich. Two persons sit between G and J. C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich. Neither J nor H ordered sandwich and pizza. The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H. The one who ordered pizza sits three places away from H. The one who ordered Roti doesn’t sit at the side. As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich. The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A. D sits second to the left of B and third to the right of the one who ordered pasta. The one who ordered Chapatti doesn’t sit in the corner. One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.</p><br><p><strong>If all the persons are made to sit in alphabetical order starting from A in a clockwise direction, then how many persons remain unchanged in their position?(excluding A)</strong></p>", "options": ["<p>Two</p>", "<p>Four</p>", "<p>Three</p>", "<p>One</p>", "<p>None</p>"], "correctIndex": 3, "solution": "<p>We have,</p>\n<ul>\n<li>G sits third to the right of the one who ordered sandwich.</li>\n<li>Two persons sit between G and J.</li>\n<li>C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich.</li>\n<li>Neither J nor H ordered sandwich and pizza.</li>\n</ul>\n<p>From the above conditions, we have two possibilities:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H.</li>\n<li>The one who ordered Roti doesn’t sit at the side.</li>\n<li>As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich.</li>\n<li>The one who ordered pizza sits three places away from H.</li>\n<li>The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>D sits second to the left of B and third to the right of the one who ordered pasta.</li>\n<li>The one who ordered Chapatti doesn’t sit in the corner.</li>\n<li>One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.(While applying this condition, case 1a gets eliminated)</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>Thus, case 1 gives the final arrangement.</p>\n<p><strong>Answer: D</strong></p>\n<p> </p>"}, {"question": "<p><strong>Study the following information carefully and answer the questions given below</strong></p>\n<p>Ten persons-A, B, C, D, E, F, G, H, I and J are sitting around a pentagon table in such a way that one person sits on each corner and faces the centre while one person sits in the middle of each side and faces away from the centre. Each ordered different dishes- roti, Nan, Noodles, Fried rice, Biryani, Burger, Pasta, Pizza, Sandwich and Chapatti. All the information is not necessarily in the same order.</p>\n<p>G sits third to the right of the one who ordered sandwich. Two persons sit between G and J. C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich. Neither J nor H ordered sandwich and pizza. The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H. The one who ordered pizza sits three places away from H. The one who ordered Roti doesn’t sit at the side. As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich. The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A. D sits second to the left of B and third to the right of the one who ordered pasta. The one who ordered Chapatti doesn’t sit in the corner. One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.</p><br><p><strong>Four of the following five are alike in a certain way as per the given arrangement and hence form a group. Find the one that does not belong to that group?</strong></p>", "options": ["<p>FA</p>", "<p>IB</p>", "<p>DI</p>", "<p>JC</p>", "<p>EG</p>"], "correctIndex": 2, "solution": "<p>We have,</p>\n<ul>\n<li>G sits third to the right of the one who ordered sandwich.</li>\n<li>Two persons sit between G and J.</li>\n<li>C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich.</li>\n<li>Neither J nor H ordered sandwich and pizza.</li>\n</ul>\n<p>From the above conditions, we have two possibilities:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H.</li>\n<li>The one who ordered Roti doesn’t sit at the side.</li>\n<li>As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich.</li>\n<li>The one who ordered pizza sits three places away from H.</li>\n<li>The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>D sits second to the left of B and third to the right of the one who ordered pasta.</li>\n<li>The one who ordered Chapatti doesn’t sit in the corner.</li>\n<li>One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.(While applying this condition, case 1a gets eliminated)</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>Thus, case 1 gives the final arrangement.</p>\n<p><strong>Answer: C (In all the given options, the second person sits to the immediate left of the first person, except for option c)</strong></p>\n<p> </p>"}, {"question": "<p><strong>Study the following information carefully and answer the questions given below</strong></p>\n<p>Ten persons-A, B, C, D, E, F, G, H, I and J are sitting around a pentagon table in such a way that one person sits on each corner and faces the centre while one person sits in the middle of each side and faces away from the centre. Each ordered different dishes- roti, Nan, Noodles, Fried rice, Biryani, Burger, Pasta, Pizza, Sandwich and Chapatti. All the information is not necessarily in the same order.</p>\n<p>G sits third to the right of the one who ordered sandwich. Two persons sit between G and J. C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich. Neither J nor H ordered sandwich and pizza. The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H. The one who ordered pizza sits three places away from H. The one who ordered Roti doesn’t sit at the side. As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich. The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A. D sits second to the left of B and third to the right of the one who ordered pasta. The one who ordered Chapatti doesn’t sit in the corner. One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.</p><br><p><strong>Which of the following statement(s) is/are not false with respect to the final arrangement?</strong></p>", "options": ["<p>Two persons sit between B and the one who sits immediate left of A</p>", "<p>The one who ordered noodles faces the one who sits second to the right of E.</p>", "<p>The one who ordered sandwich is facing away from the center</p>", "<p>The one who ordered biryani sits second to the left of the one who ordered Pizza.</p>", "<p>All the given statement is false</p>"], "correctIndex": 4, "solution": "<p>We have,</p>\n<ul>\n<li>G sits third to the right of the one who ordered sandwich.</li>\n<li>Two persons sit between G and J.</li>\n<li>C sits fourth to the left of I, who sits adjacent to the one who ordered sandwich.</li>\n<li>Neither J nor H ordered sandwich and pizza.</li>\n</ul>\n<p>From the above conditions, we have two possibilities:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>The one who ordered fried rice sits third to the left of the one who ordered roti, who sits immediate right of H.</li>\n<li>The one who ordered Roti doesn’t sit at the side.</li>\n<li>As many persons sit between I and the one who ordered biryani is same as between the one who ordered biryani and F, who is not adjacent to the one who ordered sandwich.</li>\n<li>The one who ordered pizza sits three places away from H.</li>\n<li>The one who ordered pizza sits opposite to the one who ordered Nan, who is an immediate neighbor of A.</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>Again we have,</p>\n<ul>\n<li>D sits second to the left of B and third to the right of the one who ordered pasta.</li>\n<li>The one who ordered Chapatti doesn’t sit in the corner.</li>\n<li>One person sits between the one who ordered noodles and E, who sits third to the left of the one who ordered burger.(While applying this condition, case 1a gets eliminated)</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>Thus, case 1 gives the final arrangement.</p>\n<p><strong>Answer: E</strong></p>\n<p> </p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions</strong></p><p>A%B means A has more experience than B</p><p>A&amp;B means A has less experience than B</p><p>A$B means A is elder than B</p><p>A@B means A is younger than B</p><p>! Means not</p><p># Means and</p><p>^ Means who</p><p>+ means Only</p><p><strong>Note: </strong>If ! is placed immediately before any of the symbols mentioned above then it will be considered as not case.</p><p>example-A!&amp;B means→ A is not have less experience than B</p><p>If ^ is placed immediately before any of the symbols mentioned above then it will be considered as to who case.</p><p>example-A$B^@C→ A is elder than B who is younger than C.</p><p>Among Six persons- G, M, R, U, V, and X have different experiences and they are of different ages such that the elder one is not the most experienced.</p><p><strong>Statement:</strong></p><p><strong>X % G ^&amp; M; V % U #&amp; G ^@ M ; R !&amp; X #$+ X; M @+ U; V !$ G; M !% X</strong></p><br><p><strong>If the second least experienced person has six years experience and M has twice the experience of V, then what may be the experience of G?      </strong></p>", "options": ["14", "10", "13", "5", "15"], "correctIndex": 1, "solution": "<p><strong>Final Arrangement</strong></p><p><strong>Experience→</strong>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p><strong>Age→</strong>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p>X % G ^&amp; M<strong>→</strong>X has more experience than G who has less experience than M</p><p>M !% X<strong>→</strong> M does not have more experience than X</p><p>X &gt; M &gt; G</p><p>V % U #&amp; G ^@ M <strong>→</strong> V has more experience than U and has less experience than G who is younger than M</p><p>X &gt; M &gt; G &gt; V &gt; U</p><p>M &gt; G</p><p>R !&amp; X #$+ X<strong>→</strong> R does not have less experience than X and elder than the only X</p><p>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p>_ &gt; _ &gt; _ &gt; _ &gt; R &gt; X</p><p>M @+ U<strong>→</strong> M is younger than only U</p><p>U &gt; M &gt; _ &gt; _ &gt; R &gt; X</p><p>V !$ G<strong>→</strong> V is not elder than G</p><p>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p><strong>Answer: B</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions</strong></p><p>A%B means A has more experience than B</p><p>A&amp;B means A has less experience than B</p><p>A$B means A is elder than B</p><p>A@B means A is younger than B</p><p>! Means not</p><p># Means and</p><p>^ Means who</p><p>+ means Only</p><p><strong>Note: </strong>If ! is placed immediately before any of the symbols mentioned above then it will be considered as not case.</p><p>example-A!&amp;B means→ A is not have less experience than B</p><p>If ^ is placed immediately before any of the symbols mentioned above then it will be considered as to who case.</p><p>example-A$B^@C→ A is elder than B who is younger than C.</p><p>Among Six persons- G, M, R, U, V, and X have different experiences and they are of different ages such that the elder one is not the most experienced.</p><p><strong>Statement:</strong></p><p><strong>X % G ^&amp; M; V % U #&amp; G ^@ M ; R !&amp; X #$+ X; M @+ U; V !$ G; M !% X</strong></p><br><p><strong>Who among the following pair is the eldest person and the most experienced one? </strong></p>", "options": ["GV", "XM", "RU", "UM", "GX"], "correctIndex": 2, "solution": "<p><strong>Final Arrangement</strong></p><p><strong>Experience→</strong>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p><strong>Age→</strong>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p>X % G ^&amp; M<strong>→</strong>X has more experience than G who has less experience than M</p><p>M !% X<strong>→</strong> M does not have more experience than X</p><p>X &gt; M &gt; G</p><p>V % U #&amp; G ^@ M <strong>→</strong> V has more experience than U and has less experience than G who is younger than M</p><p>X &gt; M &gt; G &gt; V &gt; U</p><p>M &gt; G</p><p>R !&amp; X #$+ X<strong>→</strong> R does not have less experience than X and elder than the only X</p><p>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p>_ &gt; _ &gt; _ &gt; _ &gt; R &gt; X</p><p>M @+ U<strong>→</strong> M is younger than only U</p><p>U &gt; M &gt; _ &gt; _ &gt; R &gt; X</p><p>V !$ G<strong>→</strong> V is not elder than G</p><p>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p><strong>Answer: C</strong></p>"}, {"question": "<p><strong>Study the following information carefully and answer the below questions</strong></p><p>A%B means A has more experience than B</p><p>A&amp;B means A has less experience than B</p><p>A$B means A is elder than B</p><p>A@B means A is younger than B</p><p>! Means not</p><p># Means and</p><p>^ Means who</p><p>+ means Only</p><p><strong>Note: </strong>If ! is placed immediately before any of the symbols mentioned above then it will be considered as not case.</p><p>example-A!&amp;B means→ A is not have less experience than B</p><p>If ^ is placed immediately before any of the symbols mentioned above then it will be considered as to who case.</p><p>example-A$B^@C→ A is elder than B who is younger than C.</p><p>Among Six persons- G, M, R, U, V, and X have different experiences and they are of different ages such that the elder one is not the most experienced.</p><p><strong>Statement:</strong></p><p><strong>X % G ^&amp; M; V % U #&amp; G ^@ M ; R !&amp; X #$+ X; M @+ U; V !$ G; M !% X</strong></p><br><p><strong>Which of the following statement is true?</strong></p><p><strong>I) </strong>R has more experience than M</p><p><strong>II) </strong>V is younger than M</p><p><strong>III) </strong>U is the youngest one</p>", "options": ["Only (II)", "Only (I)", "Only (II) and (III)", "Only (I) and (II)", "All (I), (II), and (III)"], "correctIndex": 3, "solution": "<p><strong>Final Arrangement</strong></p><p><strong>Experience→</strong>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p><strong>Age→</strong>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p>X % G ^&amp; M<strong>→</strong>X has more experience than G who has less experience than M</p><p>M !% X<strong>→</strong> M does not have more experience than X</p><p>X &gt; M &gt; G</p><p>V % U #&amp; G ^@ M <strong>→</strong> V has more experience than U and has less experience than G who is younger than M</p><p>X &gt; M &gt; G &gt; V &gt; U</p><p>M &gt; G</p><p>R !&amp; X #$+ X<strong>→</strong> R does not have less experience than X and elder than the only X</p><p>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p>_ &gt; _ &gt; _ &gt; _ &gt; R &gt; X</p><p>M @+ U<strong>→</strong> M is younger than only U</p><p>U &gt; M &gt; _ &gt; _ &gt; R &gt; X</p><p>V !$ G<strong>→</strong> V is not elder than G</p><p>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p><strong>Answer: D</strong></p>"}, {"question": "<p><strong>Below in each of the questions are given two statements I and II. These statements may be either independent causes or may be effects of independent causes or a common cause. One of these statements may be the effect of the other statement. Read both the statements and decide which of the following answer choice correctly depicts the relationship between these two statements.</strong></p><p><strong>Give answer,</strong></p><br><p><strong>Statements:</strong></p><p><strong>I).</strong> The Government has formed a committee to check and revise the fees structure of the professional courses.</p><p><strong>II).</strong> The parents of aspiring students seeking admission to professional courses had protested against the high fees charged by the professional institutes and the admission process was delayed considerably.</p>", "options": ["If statement I is the cause and statement II is its effect.", "If statement II is the cause and statement I is its effect.", "If both the statements I and II are independent causes.", "If both the statements I and II are effects of independent causes.", "If both the statements I and II ate effects of some common cause."], "correctIndex": 1, "solution": "<p><strong>Answer: B</strong></p><p>Since the parents of aspiring students seeking admission to professional courses had protested against the high fees charged by the professional institutes, the Government has formed a committee to check and revise the fees structure of the professional courses. So, Statement II is the cause and Statement I is the effect.</p>"}, {"question": "<p><strong>Below in each of the questions are given two statements I and II. These statements may be either independent causes or may be effects of independent causes or a common cause. One of these statements may be the effect of the other statement. Read both the statements and decide which of the following answer choice correctly depicts the relationship between these two statements.</strong></p><p><strong>Give answer,</strong></p><br><p><strong>Statements:</strong></p><p><strong>I).</strong> The police officers have recently increased vigil during the evening hours in the locality.</p><p><strong>II).</strong> There has been considerable reduction in the incidents of petty crimes in the locality.</p>", "options": ["If statement I is the cause and statement II is its effect.", "If statement II is the cause and statement I is its effect.", "If both the statements I and II are independent causes.", "If both the statements I and II are effects of independent causes.", "If both the statements I and II ate effects of some common cause."], "correctIndex": 0, "solution": "<p><strong>Answer: A</strong></p><p>Since the police officers have recently increased vigil during the evening hours in the locality, there has been considerable reduction in the incidents of petty crimes. So, Statement I is the cause and Statement II is the effect.</p>"}, {"question": "<p><strong>A set of statements is given below that revolve around a single topic. Answer the questions as per the individual directions given.</strong></p><br><p><strong>Statement:</strong> Amazon’s male white bellbird has the loudest recorded call.</p><p><strong>Arguments:</strong></p><p><strong>I).</strong> <em>The bellbird’s call can reach 125 decibels, almost as loud as a very loud rock concert, and more than 9 decibels higher than the loudest recorded call of the screaming piha (Lipaugusvociferans), which held the previous record of being the world’s loudest bird.</em></p><p><strong>II).</strong> The female bellbird could be sitting near a loud male to assess it up close, the researchers say. But why she risks hearing damage by doing so is unclear.</p>", "options": ["If only argument I is strong", "If only argument II is strong", "If either I or II is strong", "If neither I or II is strong", "If both I and II are strong"], "correctIndex": 0, "solution": "<p><strong>Answer: A</strong></p><p>Argument I gives the reason how the Amazon’s male white bellbird is said to have the loudest recorded call. <em>The bellbird’s call can reach 125 decibels, and more than 9 decibels higher than the loudest recorded call of the screaming piha, which held the previous record of being the world’s loudest bird. Argument 2 tells about female bird. So,</em> only argument I is strong.</p>"}] ,
+    hi: [{"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ व्यक्ति - P, Q, R, S, T, U, V और W एक आठ मंजिला इमारत में रहते हैं, जिसे नीचे से ऊपर तक क्रमशः 1 से 8 अंकित है। प्रत्येक मंजिल की ऊंचाई 10 और 45 फीट के बीच अलग-अलग होती है और प्रत्येक मंजिल की ऊंचाई 4 या 6 या दोनों का गुणज होती है। सभी जानकारी इसी क्रम में हो ऐसा आवश्यक नहीं है।</p>\n<p>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है। एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है। R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है। U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है। P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं। V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</p><br><p><strong>निम्नलिखित में से कौन </strong><strong>सा </strong><strong>व्यक्ति </strong><strong>उस व्यक्ति जिसकी </strong><strong>मंजिल </strong><strong>की </strong><strong>ऊंचाई 42 फीट </strong><strong>हैं </strong><strong>और </strong><strong>W</strong><strong> के मध्य रहता है</strong><strong>?</strong></p>\n<p><strong>I). </strong>वह व्यक्ति जिसकी मंजिल की ऊंचाई 24 फीट है।</p>\n<p><strong>II). </strong>U</p>\n<p><strong>III).</strong> वह व्यक्ति जिसकी मंजिल की ऊंचाई 16 फीट है।</p>", "options": ["<p>II और III दोनों</p>", "<p>कोई नहीं</p>", "<p>I और II दोनों</p>", "<p>केवल III</p>", "<p>सभी I, II और III</p>"], "correctIndex": 2, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>हमारे पास है:</p>\n<p>सभी संभावित ऊंचाईयां जो 4 या 6 या दोनों का एक सामान्य गुणक है: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 और 44 हैं।</p>\n<p>अब हमारे पास है:</p>\n<ul>\n<li>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है।</li>\n<li>एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (1) में S, मंजिल संख्या 1 पर रहता है, केस (2) में S, मंजिल संख्या 2 पर रहता है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n</ul>\n<p>चूंकि, ऊंचाई का ऐसा संभावित संयोजन (16, 30), (18, 32), और (30, 44) है।</p>\n<p>लेकिन W की मंजिल की ऊंचाई 30 फीट है, इस प्रकार केवल वैध संयोजन (18, 32) है।</p>\n<ul>\n<li>Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है।</li>\n</ul>\n<p>चूंकि, S और 24 फीट ऊंचाई वाले व्यक्ति के बीच कम से कम एक मंजिल का अंतर होना चाहिए।</p>\n<p>इसका अर्थ है कि केस (2) में R मंजिल संख्या 1 में रहता है, केस (1) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p>केस (1) मान्य नहीं है क्योंकि R के लिए कोई संभावित स्थिति नहीं है ।</p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है।</li>\n</ul>\n<p>इसका मतलब है कि केस (2) में T मंजिल संख्या 4 पर रहता है, केस (2a) में T मंजिल संख्या 5 पर रहता है।</p>\n<ul>\n<li>P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं।</li>\n<li>V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (2a) में S के मंजिल की ऊंचाई 42 फीट है, केस (2) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p>केस (2) मान्य नहीं है क्योंकि P और जिसकी मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिलें नहीं हैं ।</p>\n<p><strong>उत्तर: C</strong></p>\n<p> </p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ व्यक्ति - P, Q, R, S, T, U, V और W एक आठ मंजिला इमारत में रहते हैं, जिसे नीचे से ऊपर तक क्रमशः 1 से 8 अंकित है। प्रत्येक मंजिल की ऊंचाई 10 और 45 फीट के बीच अलग-अलग होती है और प्रत्येक मंजिल की ऊंचाई 4 या 6 या दोनों का गुणज होती है। सभी जानकारी इसी क्रम में हो ऐसा आवश्यक नहीं है।</p>\n<p>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है। एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है। R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है। U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है। P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं। V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</p><br><p><strong>निम्नलिखित में से कौन सा व्यक्ति उस व्यक्ति के ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है?</strong></p>\n<p><strong>I). </strong>वह व्यक्ति जिसकी मंजिल की ऊंचाई 18 फीट है।</p>\n<p><strong>II).</strong> U</p>\n<p><strong>III). </strong>वह व्यक्ति जिसकी मंजिल की ऊंचाई 20 फीट है।</p>", "options": ["<p>केवल II</p>", "<p>कोई नहीं</p>", "<p>I और III दोनों</p>", "<p>केवल III</p>", "<p>सभी I, II और III</p>"], "correctIndex": 1, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>हमारे पास है:</p>\n<p>सभी संभावित ऊंचाईयां जो 4 या 6 या दोनों का एक सामान्य गुणक है: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 और 44 हैं।</p>\n<p>अब हमारे पास है:</p>\n<ul>\n<li>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है।</li>\n<li>एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (1) में S, मंजिल संख्या 1 पर रहता है, केस (2) में S, मंजिल संख्या 2 पर रहता है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n</ul>\n<p>चूंकि, ऊंचाई का ऐसा संभावित संयोजन (16, 30), (18, 32), और (30, 44) है।</p>\n<p>लेकिन W की मंजिल की ऊंचाई 30 फीट है, इस प्रकार केवल वैध संयोजन (18, 32) है।</p>\n<ul>\n<li>Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है।</li>\n</ul>\n<p>चूंकि, S और 24 फीट ऊंचाई वाले व्यक्ति के बीच कम से कम एक मंजिल का अंतर होना चाहिए।</p>\n<p>इसका अर्थ है कि केस (2) में R मंजिल संख्या 1 में रहता है, केस (1) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p>केस (1) मान्य नहीं है क्योंकि R के लिए कोई संभावित स्थिति नहीं है ।</p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है।</li>\n</ul>\n<p>इसका मतलब है कि केस (2) में T मंजिल संख्या 4 पर रहता है, केस (2a) में T मंजिल संख्या 5 पर रहता है।</p>\n<ul>\n<li>P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं।</li>\n<li>V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (2a) में S के मंजिल की ऊंचाई 42 फीट है, केस (2) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p>केस (2) मान्य नहीं है क्योंकि P और जिसकी मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिलें नहीं हैं ।</p>\n<p><strong>उत्तर: B</strong></p>\n<p> </p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ व्यक्ति - P, Q, R, S, T, U, V और W एक आठ मंजिला इमारत में रहते हैं, जिसे नीचे से ऊपर तक क्रमशः 1 से 8 अंकित है। प्रत्येक मंजिल की ऊंचाई 10 और 45 फीट के बीच अलग-अलग होती है और प्रत्येक मंजिल की ऊंचाई 4 या 6 या दोनों का गुणज होती है। सभी जानकारी इसी क्रम में हो ऐसा आवश्यक नहीं है।</p>\n<p>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है। एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है। R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है। U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है। P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं। V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</p><br><p><strong>निम्नलिखित में से कौन सा व्यक्ति P के तत्काल नीचे रहता है?</strong></p>", "options": ["<p>वह व्यक्ति जो R से दो मंजिल ऊपर रहता है</p>", "<p>T</p>", "<p>वह व्यक्ति जिसकी मंजिल की ऊंचाई 16 फीट है</p>", "<p>S</p>", "<p>इनमें से कोई नहीं</p>"], "correctIndex": 0, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>हमारे पास है:</p>\n<p>सभी संभावित ऊंचाईयां जो 4 या 6 या दोनों का एक सामान्य गुणक है: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 और 44 हैं।</p>\n<p>अब हमारे पास है:</p>\n<ul>\n<li>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है।</li>\n<li>एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (1) में S, मंजिल संख्या 1 पर रहता है, केस (2) में S, मंजिल संख्या 2 पर रहता है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n</ul>\n<p>चूंकि, ऊंचाई का ऐसा संभावित संयोजन (16, 30), (18, 32), और (30, 44) है।</p>\n<p>लेकिन W की मंजिल की ऊंचाई 30 फीट है, इस प्रकार केवल वैध संयोजन (18, 32) है।</p>\n<ul>\n<li>Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है।</li>\n</ul>\n<p>चूंकि, S और 24 फीट ऊंचाई वाले व्यक्ति के बीच कम से कम एक मंजिल का अंतर होना चाहिए।</p>\n<p>इसका अर्थ है कि केस (2) में R मंजिल संख्या 1 में रहता है, केस (1) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p>केस (1) मान्य नहीं है क्योंकि R के लिए कोई संभावित स्थिति नहीं है ।</p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है।</li>\n</ul>\n<p>इसका मतलब है कि केस (2) में T मंजिल संख्या 4 पर रहता है, केस (2a) में T मंजिल संख्या 5 पर रहता है।</p>\n<ul>\n<li>P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं।</li>\n<li>V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (2a) में S के मंजिल की ऊंचाई 42 फीट है, केस (2) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p>केस (2) मान्य नहीं है क्योंकि P और जिसकी मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिलें नहीं हैं ।</p>\n<p><strong>उत्तर: A</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ व्यक्ति - P, Q, R, S, T, U, V और W एक आठ मंजिला इमारत में रहते हैं, जिसे नीचे से ऊपर तक क्रमशः 1 से 8 अंकित है। प्रत्येक मंजिल की ऊंचाई 10 और 45 फीट के बीच अलग-अलग होती है और प्रत्येक मंजिल की ऊंचाई 4 या 6 या दोनों का गुणज होती है। सभी जानकारी इसी क्रम में हो ऐसा आवश्यक नहीं है।</p>\n<p>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है। एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है। R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है। U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है। P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं। V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</p><br><p><strong>निम्नलिखित पांच में से चार दी गई व्यवस्था के अनुसार एक निश्चित तरीके से समान हैं और इस प्रकार एक समूह बनाते हैं, उस समूह का पता लगाएं जो उस समूह से संबंधित नहीं है?</strong></p>", "options": ["<p>वह व्यक्ति जिसकी मंजिल की ऊंचाई 30 फीट है।</p>", "<p>V</p>", "<p>वह व्यक्ति जिसकी मंजिल की ऊंचाई 18 फीट है</p>", "<p>वह व्यक्ति जो Q से तीन मंजिल नीचे रहता है</p>", "<p>U</p>"], "correctIndex": 0, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>हमारे पास है:</p>\n<p>सभी संभावित ऊंचाईयां जो 4 या 6 या दोनों का एक सामान्य गुणक है: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 और 44 हैं।</p>\n<p>अब हमारे पास है:</p>\n<ul>\n<li>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है।</li>\n<li>एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (1) में S, मंजिल संख्या 1 पर रहता है, केस (2) में S, मंजिल संख्या 2 पर रहता है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n</ul>\n<p>चूंकि, ऊंचाई का ऐसा संभावित संयोजन (16, 30), (18, 32), और (30, 44) है।</p>\n<p>लेकिन W की मंजिल की ऊंचाई 30 फीट है, इस प्रकार केवल वैध संयोजन (18, 32) है।</p>\n<ul>\n<li>Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है।</li>\n</ul>\n<p>चूंकि, S और 24 फीट ऊंचाई वाले व्यक्ति के बीच कम से कम एक मंजिल का अंतर होना चाहिए।</p>\n<p>इसका अर्थ है कि केस (2) में R मंजिल संख्या 1 में रहता है, केस (1) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p>केस (1) मान्य नहीं है क्योंकि R के लिए कोई संभावित स्थिति नहीं है ।</p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है।</li>\n</ul>\n<p>इसका मतलब है कि केस (2) में T मंजिल संख्या 4 पर रहता है, केस (2a) में T मंजिल संख्या 5 पर रहता है।</p>\n<ul>\n<li>P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं।</li>\n<li>V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (2a) में S के मंजिल की ऊंचाई 42 फीट है, केस (2) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p>केस (2) मान्य नहीं है क्योंकि P और जिसकी मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिलें नहीं हैं ।</p>\n<p><strong>उत्तर: A</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ व्यक्ति - P, Q, R, S, T, U, V और W एक आठ मंजिला इमारत में रहते हैं, जिसे नीचे से ऊपर तक क्रमशः 1 से 8 अंकित है। प्रत्येक मंजिल की ऊंचाई 10 और 45 फीट के बीच अलग-अलग होती है और प्रत्येक मंजिल की ऊंचाई 4 या 6 या दोनों का गुणज होती है। सभी जानकारी इसी क्रम में हो ऐसा आवश्यक नहीं है।</p>\n<p>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है। एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है। R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है। Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है। जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है। U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है। P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं। V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</p><br><p><strong>व्यक्ति </strong><strong>जिस</strong><strong>की </strong><strong>मंजिल की ऊंचाई 20 फीट है, उसके ऊपर कितने व्यक्ति रह</strong><strong>ते </strong><strong>हैं?</strong></p>\n<p><strong>I). </strong>जितने व्यक्ति R और W के बीच रहते हैं</p>\n<p><strong>II).</strong> जितने व्यक्ति U के नीचे रहते हैं</p>\n<p><strong>III).</strong> जितने व्यक्ति T के नीचे रहते हैं</p>", "options": ["<p>II और III दोनों</p>", "<p>कोई नहीं</p>", "<p>I और III दोनों</p>", "<p>केवल III</p>", "<p>सभी I, II और III</p>"], "correctIndex": 2, "solution": "<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457916478.png\" title=\"6.PNG\"/></p>\n<p>हमारे पास है:</p>\n<p>सभी संभावित ऊंचाईयां जो 4 या 6 या दोनों का एक सामान्य गुणक है: 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42 और 44 हैं।</p>\n<p>अब हमारे पास है:</p>\n<ul>\n<li>S उस व्यक्ति से पांच मंजिल नीचे रहता है जिसकी मंजिल की ऊंचाई 16 फीट है।</li>\n<li>एक व्यक्ति S और उस व्यक्ति के मध्य रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 20 फीट है, उसके नीचे रहने वाले व्यक्तियों की संख्या, W से ऊपर रहने वाले व्यक्तियों की संख्या से एक अधिक है, जिसकी मंजिल की ऊंचाई 30 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (1) में S, मंजिल संख्या 1 पर रहता है, केस (2) में S, मंजिल संख्या 2 पर रहता है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457928463.png\" title=\"7.PNG\"/></p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>R के मंजिल की ऊंचाई U के मंजिल की ऊंचाई से 14 फीट कम है, जो उस व्यक्ति के मंजिल के तत्काल नीचे रहता है जिसकी मंजिल की ऊंचाई 20 फीट है।</li>\n</ul>\n<p>चूंकि, ऊंचाई का ऐसा संभावित संयोजन (16, 30), (18, 32), और (30, 44) है।</p>\n<p>लेकिन W की मंजिल की ऊंचाई 30 फीट है, इस प्रकार केवल वैध संयोजन (18, 32) है।</p>\n<ul>\n<li>Q उस व्यक्ति से तीन मंजिल ऊपर रहता है जिसकी मंजिल की ऊंचाई 24 फीट है।</li>\n<li>जिस व्यक्ति की मंजिल की ऊंचाई 24 फीट है और S के बीच रहने वाले व्यक्तियों की संख्या, R और W के बीच की मंजिलों की संख्या से आधी है।</li>\n</ul>\n<p>चूंकि, S और 24 फीट ऊंचाई वाले व्यक्ति के बीच कम से कम एक मंजिल का अंतर होना चाहिए।</p>\n<p>इसका अर्थ है कि केस (2) में R मंजिल संख्या 1 में रहता है, केस (1) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457933536.png\" title=\"8.PNG\"/></p>\n<p>केस (1) मान्य नहीं है क्योंकि R के लिए कोई संभावित स्थिति नहीं है ।</p>\n<p>फिर से, हमारे पास है:</p>\n<ul>\n<li>U और T के बीच मंजिलों की संख्या, V और T के बीच मंजिलों की संख्या के समान है।</li>\n</ul>\n<p>इसका मतलब है कि केस (2) में T मंजिल संख्या 4 पर रहता है, केस (2a) में T मंजिल संख्या 5 पर रहता है।</p>\n<ul>\n<li>P और जिस व्यक्ति की मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिल नहीं हैं।</li>\n<li>V के ऊपर किसी एक मंजिल की ऊंचाई 28 फीट है।</li>\n</ul>\n<p>इसका अर्थ है कि केस (2a) में S के मंजिल की ऊंचाई 42 फीट है, केस (2) मान्य नहीं है।</p>\n<p>ऊपर दी गई जानकारी के आधार पर हमारे पास है:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165457941640.png\" title=\"9.PNG\"/></p>\n<p>केस (2) मान्य नहीं है क्योंकि P और जिसकी मंजिल की ऊंचाई 42 फीट है, के बीच दो से अधिक मंजिलें नहीं हैं ।</p>\n<p><strong>उत्तर: C</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ कुर्सियाँ अर्थात् Z, X, C, V, B, N, M और T को एक आयताकार आकार के कमरे के चारों ओर इस तरह रखा गया है कि प्रत्येक लंबी भुजा पर तीन कुर्सियाँ एक दूसरे के बीच समान दूरी पर रखी गई हैं और एक कुर्सी प्रत्येक छोटी भुजा के बीच में रखी गई है। सभी कुर्सियाँ कमरे के केंद्र की ओर उन्मुख हैं। कमरे का परिमाप 96 मीटर है। कमरे की लंबाई और चौड़ाई का अनुपात क्रमशः 3:1 है।</p>\n<p>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है। कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है। कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है। कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है। कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है। कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है। कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</p><br><p><strong>अंतिम व्यवस्था के संबंध में कुर्सी T और कुर्सी M के बीच की दूरी क्या है?</strong></p>", "options": ["<p>39 मीटर</p>", "<p>24 मीटर</p>", "<p>57 मीटर</p>", "<p>या तो a या b</p>", "<p>या तो a या c</p>"], "correctIndex": 4, "solution": "<p><strong>अंतिम व्यवस्था:</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>हमारे पास है,</p>\n<p>आयत का परिमाप 96 मीटर है।</p>\n<p>आयत सूत्र का परिमाप = 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96 मीटर</li>\n<li>L + B= 96/2=48 मीटर</li>\n<li>लंबाई और चौड़ाई के बीच का अनुपात 3:1 है</li>\n<li>3x+x=4x=48 मीटर</li>\n<li>X=12 मीटर</li>\n<li>लंबाई (L) 3x है इसलिए 3*12 = 36 मीटर</li>\n<li>चौड़ाई(B) x है इसलिए x= 12 मीटर</li>\n<li>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है।</li>\n<li>कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से, दो संभावनाएँ हैं</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है।</li>\n<li>कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है।</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है।</li>\n<li>कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है।</li>\n<li>कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से केस 1 समाप्त हो जाता है क्योंकि कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के साथ नहीं रखा गया है, संतुष्ट नहीं करता है।</p>\n<p>इसलिए केस 2 अंतिम उत्तर दिखाता है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>उत्तर: E</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ कुर्सियाँ अर्थात् Z, X, C, V, B, N, M और T को एक आयताकार आकार के कमरे के चारों ओर इस तरह रखा गया है कि प्रत्येक लंबी भुजा पर तीन कुर्सियाँ एक दूसरे के बीच समान दूरी पर रखी गई हैं और एक कुर्सी प्रत्येक छोटी भुजा के बीच में रखी गई है। सभी कुर्सियाँ कमरे के केंद्र की ओर उन्मुख हैं। कमरे का परिमाप 96 मीटर है। कमरे की लंबाई और चौड़ाई का अनुपात क्रमशः 3:1 है।</p>\n<p>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है। कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है। कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है। कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है। कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है। कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है। कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</p><br><p><strong>कुर्सी N और कुर्सी X के बीच रखी कुर्सियों की संख्या, जब कुर्सी N के दाईं ओर से गिना जाता है, __ और __ के बीच रखी कुर्सियों की संख्या से एक अधिक होती है।</strong></p>", "options": ["<p>कुर्सी B और कुर्सी T</p>", "<p>कुर्सी<strong> </strong>M और कुर्सी<strong> </strong>C</p>", "<p>कुर्सी<strong> </strong>N और कुर्सी<strong> </strong>V</p>", "<p>कुर्सी<strong> </strong>Z और कुर्सी<strong> </strong>B</p>", "<p>कुर्सी<strong> </strong>X और कुर्सी<strong> </strong>V</p>"], "correctIndex": 0, "solution": "<p><strong>अंतिम व्यवस्था:</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>हमारे पास है,</p>\n<p>आयत का परिमाप 96 मीटर है।</p>\n<p>आयत सूत्र का परिमाप = 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96 मीटर</li>\n<li>L + B= 96/2=48 मीटर</li>\n<li>लंबाई और चौड़ाई के बीच का अनुपात 3:1 है</li>\n<li>3x+x=4x=48 मीटर</li>\n<li>X=12 मीटर</li>\n<li>लंबाई (L) 3x है इसलिए 3*12 = 36 मीटर</li>\n<li>चौड़ाई(B) x है इसलिए x= 12 मीटर</li>\n<li>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है।</li>\n<li>कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से, दो संभावनाएँ हैं</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है।</li>\n<li>कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है।</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है।</li>\n<li>कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है।</li>\n<li>कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से केस 1 समाप्त हो जाता है क्योंकि कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के साथ नहीं रखा गया है, संतुष्ट नहीं करता है।</p>\n<p>इसलिए केस 2 अंतिम उत्तर दिखाता है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>उत्तर: A</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ कुर्सियाँ अर्थात् Z, X, C, V, B, N, M और T को एक आयताकार आकार के कमरे के चारों ओर इस तरह रखा गया है कि प्रत्येक लंबी भुजा पर तीन कुर्सियाँ एक दूसरे के बीच समान दूरी पर रखी गई हैं और एक कुर्सी प्रत्येक छोटी भुजा के बीच में रखी गई है। सभी कुर्सियाँ कमरे के केंद्र की ओर उन्मुख हैं। कमरे का परिमाप 96 मीटर है। कमरे की लंबाई और चौड़ाई का अनुपात क्रमशः 3:1 है।</p>\n<p>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है। कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है। कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है। कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है। कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है। कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है। कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</p><br><p><strong>कुर्सी B और कुर्सी T के बीच की दूरी के योग और कुर्सी C और कुर्सी Z के बीच की दूरी के योग के बीच क्या अंतर है, जब कुर्सी B और कुर्सी C दोनों के दाईं ओर से गिना जाता है?</strong></p>", "options": ["<p>10 मीटर</p>", "<p>14 मीटर</p>", "<p>15 मीटर</p>", "<p>16 मीटर</p>", "<p>5 मीटर</p>"], "correctIndex": 2, "solution": "<p><strong>अंतिम व्यवस्था:</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>हमारे पास है,</p>\n<p>आयत का परिमाप 96 मीटर है।</p>\n<p>आयत सूत्र का परिमाप = 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96 मीटर</li>\n<li>L + B= 96/2=48 मीटर</li>\n<li>लंबाई और चौड़ाई के बीच का अनुपात 3:1 है</li>\n<li>3x+x=4x=48 मीटर</li>\n<li>X=12 मीटर</li>\n<li>लंबाई (L) 3x है इसलिए 3*12 = 36 मीटर</li>\n<li>चौड़ाई(B) x है इसलिए x= 12 मीटर</li>\n<li>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है।</li>\n<li>कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से, दो संभावनाएँ हैं</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है।</li>\n<li>कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है।</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है।</li>\n<li>कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है।</li>\n<li>कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से केस 1 समाप्त हो जाता है क्योंकि कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के साथ नहीं रखा गया है, संतुष्ट नहीं करता है।</p>\n<p>इसलिए केस 2 अंतिम उत्तर दिखाता है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>उत्तर: C</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ कुर्सियाँ अर्थात् Z, X, C, V, B, N, M और T को एक आयताकार आकार के कमरे के चारों ओर इस तरह रखा गया है कि प्रत्येक लंबी भुजा पर तीन कुर्सियाँ एक दूसरे के बीच समान दूरी पर रखी गई हैं और एक कुर्सी प्रत्येक छोटी भुजा के बीच में रखी गई है। सभी कुर्सियाँ कमरे के केंद्र की ओर उन्मुख हैं। कमरे का परिमाप 96 मीटर है। कमरे की लंबाई और चौड़ाई का अनुपात क्रमशः 3:1 है।</p>\n<p>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है। कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है। कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है। कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है। कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है। कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है। कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</p><br><p><strong>कुर्सी </strong><strong>Z </strong><strong>और कुर्सी </strong><strong>B </strong><strong>दोनों के संबंध में निम्नलिखित में से कौन सा कथन सत्य नहीं है</strong><strong>?</strong></p>\n<p><strong>I).</strong> कुर्सी V को कुर्सी B के 33 मीटर बाईं ओर रखा गया है</p>\n<p><strong>II).</strong> कुर्सी Z को कुर्सी M के बाएं से दूसरे स्थान पर रखा गया है</p>\n<p><strong>III).</strong> कुर्सी B के बायीं ओर से गिनने पर कुर्सी B और कुर्सी Z के बीच की दूरी 33 मीटर है</p>", "options": ["<p>केवल III</p>", "<p>केवल I और II</p>", "<p>केवल II और III</p>", "<p>केवल I</p>", "<p>सभी I, II और III</p>"], "correctIndex": 3, "solution": "<p><strong>अंतिम व्यवस्था:</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>हमारे पास है,</p>\n<p>आयत का परिमाप 96 मीटर है।</p>\n<p>आयत सूत्र का परिमाप = 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96 मीटर</li>\n<li>L + B= 96/2=48 मीटर</li>\n<li>लंबाई और चौड़ाई के बीच का अनुपात 3:1 है</li>\n<li>3x+x=4x=48 मीटर</li>\n<li>X=12 मीटर</li>\n<li>लंबाई (L) 3x है इसलिए 3*12 = 36 मीटर</li>\n<li>चौड़ाई(B) x है इसलिए x= 12 मीटर</li>\n<li>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है।</li>\n<li>कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से, दो संभावनाएँ हैं</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है।</li>\n<li>कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है।</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है।</li>\n<li>कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है।</li>\n<li>कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से केस 1 समाप्त हो जाता है क्योंकि कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के साथ नहीं रखा गया है, संतुष्ट नहीं करता है।</p>\n<p>इसलिए केस 2 अंतिम उत्तर दिखाता है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>उत्तर: D</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और दिए गए प्रश्नों के उत्तर दें।</strong></p>\n<p>आठ कुर्सियाँ अर्थात् Z, X, C, V, B, N, M और T को एक आयताकार आकार के कमरे के चारों ओर इस तरह रखा गया है कि प्रत्येक लंबी भुजा पर तीन कुर्सियाँ एक दूसरे के बीच समान दूरी पर रखी गई हैं और एक कुर्सी प्रत्येक छोटी भुजा के बीच में रखी गई है। सभी कुर्सियाँ कमरे के केंद्र की ओर उन्मुख हैं। कमरे का परिमाप 96 मीटर है। कमरे की लंबाई और चौड़ाई का अनुपात क्रमशः 3:1 है।</p>\n<p>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है। कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है। कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है। कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है। कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है। कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है। कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</p><br><p><strong>आयताकार कमरे के विकर्ण और कुर्सी X और कुर्सी M के बीच की दूरी (विकर्ण मान को लगभग मानें) के बीच क्या अंतर है?</strong></p>", "options": ["<p>12 मीटर</p>", "<p>10 मीटर</p>", "<p>13 मीटर</p>", "<p>15 मीटर</p>", "<p>9 मीटर</p>"], "correctIndex": 1, "solution": "<p><strong>अंतिम व्यवस्था:</strong></p>\n<p><strong><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331403945.jpg\" title=\"187.JPG\"/></strong></p>\n<p>हमारे पास है,</p>\n<p>आयत का परिमाप 96 मीटर है।</p>\n<p>आयत सूत्र का परिमाप = 2(l + b)</p>\n<ul>\n<li>2(l + b)= 96 मीटर</li>\n<li>L + B= 96/2=48 मीटर</li>\n<li>लंबाई और चौड़ाई के बीच का अनुपात 3:1 है</li>\n<li>3x+x=4x=48 मीटर</li>\n<li>X=12 मीटर</li>\n<li>लंबाई (L) 3x है इसलिए 3*12 = 36 मीटर</li>\n<li>चौड़ाई(B) x है इसलिए x= 12 मीटर</li>\n<li>कुर्सी Z और कुर्सी X के बीच की दूरी 24 मीटर है।</li>\n<li>कुर्सी X को मेज की छोटी भुजा पर नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से, दो संभावनाएँ हैं</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331414572.jpg\" title=\"188.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी Z और कुर्सी M के बीच एक कुर्सी रखी गई है।</li>\n<li>कुर्सी T को कुर्सी M के बाईं ओर से तीसरे स्थान पर रखा गया है।</li>\n</ul>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331420582.jpg\" title=\"189.JPG\"/></p>\n<p>फिर से हमारे पास है,</p>\n<ul>\n<li>कुर्सी T और कुर्सी B के बीच की दूरी या तो 48 मीटर या 30 मीटर है।</li>\n<li>कुर्सी N और कुर्सी V के बीच की दूरी 33 मीटर है।</li>\n<li>कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के आसन्न नहीं रखा गया है।</li>\n</ul>\n<p>उपरोक्त शर्तों से केस 1 समाप्त हो जाता है क्योंकि कुर्सी C को कुर्सी V के 15 मीटर दाईं ओर रखा गया है लेकिन कुर्सी M के साथ नहीं रखा गया है, संतुष्ट नहीं करता है।</p>\n<p>इसलिए केस 2 अंतिम उत्तर दिखाता है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/169331425337.jpg\" title=\"190.JPG\"/></p>\n<p><strong>उत्तर: B</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें|</strong></p>\n<p>दस व्यक्ति-A, B, C, D, E, F, G, H, I और J एक पेंटागन मेज़ के चारों ओर इस तरह बैठे हैं कि एक व्यक्ति प्रत्येक कोने पर बैठता है और केंद्र की ओर मुख करता है जबकि एक व्यक्ति मेज़ की प्रत्येक भुजा के बीच में बैठता है और केंद्र से बाहर की ओर मुख करता है। प्रत्येक ने अलग-अलग व्यंजन - रोटी, नान, नूडल्स, फ्राइड राइस, बिरयानी, बर्गर, पास्ता, पिज्जा, सैंडविच और चपाती ऑर्डर किया। जरूरी नहीं कि सभी जानकारी इसी क्रम में हों।</p>\n<p>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। G और J के मध्य दो व्यक्ति बैठे हैं। C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है। न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया। वह व्यक्ति जिसने फ्राइड राइस आर्डर किया वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है। पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है। रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है। जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है। पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है। D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है। नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है।</p><br><p><strong>निम्नलिखित में से कौन सा व्यक्ति चपाती ऑर्डर करने वाले व्यक्ति</strong> <strong>के तत्काल दायें बैठा है</strong><strong>?</strong></p>", "options": ["<p>वह व्यक्ति जो रोटी आर्डर करता है।</p>", "<p>वह व्यक्ति जो फ्राइड राइस ऑर्डर करता है।</p>", "<p>E</p>", "<p>वह व्यक्ति जो पिज़्ज़ा ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है</p>", "<p>a और d दोनों</p>"], "correctIndex": 0, "solution": "<p>हमारे पास है,</p>\n<ul>\n<li>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>G और J के मध्य दो व्यक्ति बैठे हैं।</li>\n<li>C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है।</li>\n<li>न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया।</li>\n</ul>\n<p>उपरोक्त स्थितियों से, हमारे पास दो संभावनाएं हैं:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>वह व्यक्ति जिसने फ्राइड राइस आर्डर किए वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है।</li>\n<li>रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है।</li>\n<li>जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है।</li>\n<li>पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है।</li>\n</ul>\n<p>पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है।</li>\n</ul>\n<p>नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है। (इस शर्त को लागू करने पर, केस 1a समाप्त हो जाता है)</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>इस प्रकार, केस 1 अंतिम व्यवस्था देती है।</p>\n<p><strong>उत्तर</strong><strong>: A</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें|</strong></p>\n<p>दस व्यक्ति-A, B, C, D, E, F, G, H, I और J एक पेंटागन मेज़ के चारों ओर इस तरह बैठे हैं कि एक व्यक्ति प्रत्येक कोने पर बैठता है और केंद्र की ओर मुख करता है जबकि एक व्यक्ति मेज़ की प्रत्येक भुजा के बीच में बैठता है और केंद्र से बाहर की ओर मुख करता है। प्रत्येक ने अलग-अलग व्यंजन - रोटी, नान, नूडल्स, फ्राइड राइस, बिरयानी, बर्गर, पास्ता, पिज्जा, सैंडविच और चपाती ऑर्डर किया। जरूरी नहीं कि सभी जानकारी इसी क्रम में हों।</p>\n<p>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। G और J के मध्य दो व्यक्ति बैठे हैं। C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है। न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया। वह व्यक्ति जिसने फ्राइड राइस आर्डर किया वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है। पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है। रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है। जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है। पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है। D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है। नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है।</p><br><p><strong>यदि कोने में बैठे व्यक्तियों द्वारा भुगतान की गई राशि 210 रुपये/व्यक्ति है और अन्य ने 250 रुपये/व्यक्ति का भुगतान किया है, तो पास्ता ऑर्डर करने वाले व्यक्ति के दायें से दूसरे स्थान पर बैठे व्यक्ति और F के आसन्न बैठे व्यक्तियों द्वारा भुगतान की गई राशि का योग क्या है?</strong></p>", "options": ["<p>650 रुपये</p>", "<p>670 रुपये</p>", "<p>710 रुपये</p>", "<p>750 रुपये</p>", "<p>630 रुपये</p>"], "correctIndex": 1, "solution": "<p>हमारे पास है,</p>\n<ul>\n<li>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>G और J के मध्य दो व्यक्ति बैठे हैं।</li>\n<li>C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है।</li>\n<li>न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया।</li>\n</ul>\n<p>उपरोक्त स्थितियों से, हमारे पास दो संभावनाएं हैं:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>वह व्यक्ति जिसने फ्राइड राइस आर्डर किए वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है।</li>\n<li>रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है।</li>\n<li>जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है।</li>\n<li>पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है।</li>\n</ul>\n<p>पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है।</li>\n</ul>\n<p>नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है। (इस शर्त को लागू करने पर, केस 1a समाप्त हो जाता है)</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>इस प्रकार, केस 1 अंतिम व्यवस्था देती है।</p>\n<p><strong>उत्तर</strong><strong>: B</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें|</strong></p>\n<p>दस व्यक्ति-A, B, C, D, E, F, G, H, I और J एक पेंटागन मेज़ के चारों ओर इस तरह बैठे हैं कि एक व्यक्ति प्रत्येक कोने पर बैठता है और केंद्र की ओर मुख करता है जबकि एक व्यक्ति मेज़ की प्रत्येक भुजा के बीच में बैठता है और केंद्र से बाहर की ओर मुख करता है। प्रत्येक ने अलग-अलग व्यंजन - रोटी, नान, नूडल्स, फ्राइड राइस, बिरयानी, बर्गर, पास्ता, पिज्जा, सैंडविच और चपाती ऑर्डर किया। जरूरी नहीं कि सभी जानकारी इसी क्रम में हों।</p>\n<p>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। G और J के मध्य दो व्यक्ति बैठे हैं। C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है। न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया। वह व्यक्ति जिसने फ्राइड राइस आर्डर किया वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है। पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है। रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है। जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है। पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है। D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है। नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है।</p><br><p><strong>यदि सभी व्यक्तियों को A से शुरू करके दक्षिणावर्त दिशा में वर्णानुक्रम में बैठाया जाता है, तो कितने व्यक्ति (A को छोड़कर) अपनी स्थिति में अपरिवर्तित रहते हैं?</strong></p>", "options": ["<p>दो</p>", "<p>चार</p>", "<p>तीन</p>", "<p>एक</p>", "<p>कोई नहीं</p>"], "correctIndex": 3, "solution": "<p>हमारे पास है,</p>\n<ul>\n<li>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>G और J के मध्य दो व्यक्ति बैठे हैं।</li>\n<li>C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है।</li>\n<li>न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया।</li>\n</ul>\n<p>उपरोक्त स्थितियों से, हमारे पास दो संभावनाएं हैं:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>वह व्यक्ति जिसने फ्राइड राइस आर्डर किए वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है।</li>\n<li>रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है।</li>\n<li>जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है।</li>\n<li>पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है।</li>\n</ul>\n<p>पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है।</li>\n</ul>\n<p>नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है। (इस शर्त को लागू करने पर, केस 1a समाप्त हो जाता है)</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>इस प्रकार, केस 1 अंतिम व्यवस्था देती है।</p>\n<p><strong>उत्तर</strong><strong>: D</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें|</strong></p>\n<p>दस व्यक्ति-A, B, C, D, E, F, G, H, I और J एक पेंटागन मेज़ के चारों ओर इस तरह बैठे हैं कि एक व्यक्ति प्रत्येक कोने पर बैठता है और केंद्र की ओर मुख करता है जबकि एक व्यक्ति मेज़ की प्रत्येक भुजा के बीच में बैठता है और केंद्र से बाहर की ओर मुख करता है। प्रत्येक ने अलग-अलग व्यंजन - रोटी, नान, नूडल्स, फ्राइड राइस, बिरयानी, बर्गर, पास्ता, पिज्जा, सैंडविच और चपाती ऑर्डर किया। जरूरी नहीं कि सभी जानकारी इसी क्रम में हों।</p>\n<p>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। G और J के मध्य दो व्यक्ति बैठे हैं। C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है। न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया। वह व्यक्ति जिसने फ्राइड राइस आर्डर किया वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है। पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है। रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है। जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है। पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है। D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है। नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है।</p><br><p><strong>दी गई व्यवस्था के अनुसार निम्नलिखित पांच में से चार एक निश्चित तरीके से समान हैं और इसलिए एक समूह बनाते हैं। वह खोजें जो उस समूह से संबंधित नहीं है?</strong></p>", "options": ["<p>FA</p>", "<p>IB</p>", "<p>DI</p>", "<p>JC</p>", "<p>EG</p>"], "correctIndex": 2, "solution": "<p>हमारे पास है,</p>\n<ul>\n<li>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>G और J के मध्य दो व्यक्ति बैठे हैं।</li>\n<li>C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है।</li>\n<li>न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया।</li>\n</ul>\n<p>उपरोक्त स्थितियों से, हमारे पास दो संभावनाएं हैं:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>वह व्यक्ति जिसने फ्राइड राइस आर्डर किए वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है।</li>\n<li>रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है।</li>\n<li>जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है।</li>\n<li>पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है।</li>\n</ul>\n<p>पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है।</li>\n</ul>\n<p>नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है। (इस शर्त को लागू करने पर, केस 1a समाप्त हो जाता है)</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>इस प्रकार, केस 1 अंतिम व्यवस्था देती है।</p>\n<p><strong>उत्तर</strong><strong>: C</strong>(विकल्प C को छोड़कर, दिए गए सभी विकल्पों में, दूसरा व्यक्ति पहले व्यक्ति के तत्काल बाईं ओर बैठता है,)</p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें|</strong></p>\n<p>दस व्यक्ति-A, B, C, D, E, F, G, H, I और J एक पेंटागन मेज़ के चारों ओर इस तरह बैठे हैं कि एक व्यक्ति प्रत्येक कोने पर बैठता है और केंद्र की ओर मुख करता है जबकि एक व्यक्ति मेज़ की प्रत्येक भुजा के बीच में बैठता है और केंद्र से बाहर की ओर मुख करता है। प्रत्येक ने अलग-अलग व्यंजन - रोटी, नान, नूडल्स, फ्राइड राइस, बिरयानी, बर्गर, पास्ता, पिज्जा, सैंडविच और चपाती ऑर्डर किया। जरूरी नहीं कि सभी जानकारी इसी क्रम में हों।</p>\n<p>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। G और J के मध्य दो व्यक्ति बैठे हैं। C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है। न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया। वह व्यक्ति जिसने फ्राइड राइस आर्डर किया वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है। पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है। रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है। जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है। पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है। D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है। वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है। नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है।</p><br><p><strong>अंतिम व्यवस्था के संबंध में निम्नलिखित में से कौन सा/से कथन गलत नहीं है/हैं?</strong></p>", "options": ["<p>B और A के तत्काल बायें बैठे व्यक्ति के बीच दो व्यक्ति बैठे हैं</p>", "<p>नूडल्स ऑर्डर करने वाले व्यक्ति का मुख E के दायें से दूसरे स्थान पर बैठे व्यक्ति की ओर है।</p>", "<p>सैंडविच ऑर्डर करने वाले व्यक्ति का मुख केंद्र से बाहर की ओर है</p>", "<p>बिरयानी ऑर्डर करने वाला व्यक्ति पिज़्ज़ा ऑर्डर करने वाले व्यक्ति के बायें से दूसरे स्थान पर बैठा है।</p>", "<p>दिए गए सभी कथन असत्य हैं</p>"], "correctIndex": 4, "solution": "<p>हमारे पास है,</p>\n<ul>\n<li>G, सैंडविच ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>G और J के मध्य दो व्यक्ति बैठे हैं।</li>\n<li>C, I के बायें से चौथे स्थान पर बैठा है, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न बैठा है।</li>\n<li>न तो J और न ही H ने सैंडविच और पिज्जा ऑर्डर किया।</li>\n</ul>\n<p>उपरोक्त स्थितियों से, हमारे पास दो संभावनाएं हैं:</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769554174.png\" title=\"19.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>वह व्यक्ति जिसने फ्राइड राइस आर्डर किए वह रोटी ऑर्डर करने वाले व्यक्ति के बायें से तीसरे स्थान पर बैठा है, जो H के तत्काल दायें बैठा है।</li>\n<li>रोटी आर्डर करने वाला व्यक्ति भुजा पर नहीं बैठा है।</li>\n<li>जितने व्यक्ति I और बिरयानी ऑर्डर करने वाले व्यक्ति के बीच बैठे हैं उतने ही व्यक्ति बिरयानी ऑर्डर करने वाले व्यक्ति और F के बीच बैठे हैं, जो सैंडविच ऑर्डर करने वाले व्यक्ति के आसन्न नहीं है।</li>\n<li>पिज्जा ऑर्डर करने वाला व्यक्ति H से तीन स्थान दूर बैठा है।</li>\n</ul>\n<p>पिज्जा ऑर्डर करने वाला व्यक्ति नान ऑर्डर करने वाले व्यक्ति के विपरीत बैठा है, जो कि A का तत्काल पड़ोसी है।</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769559325.png\" title=\"20.PNG\"/></p>\n<p>हमारे पास फिर से है,</p>\n<ul>\n<li>D, B के बायें से दूसरे स्थान पर और पास्ता ऑर्डर करने वाले व्यक्ति के दायें से तीसरे स्थान पर बैठा है।</li>\n<li>वह व्यक्ति जो चपाती का आर्डर देता है, वह कोने में नहीं बैठा है।</li>\n</ul>\n<p>नूडल्स ऑर्डर करने वाले व्यक्ति और E, जो बर्गर ऑर्डर करने वाले व्यक्ति के बाएं से तीसरे स्थान पर बैठा है, के बीच एक व्यक्ति बैठा है। (इस शर्त को लागू करने पर, केस 1a समाप्त हो जाता है)</p>\n<p><img alt=\"\" class=\"imagepopup\" loading=\"lazy\" src=\"https://cdn.guidely.in/editor/practiceMockQuestions/165769564055.png\" title=\"21.PNG\"/></p>\n<p>इस प्रकार, केस 1 अंतिम व्यवस्था देती है।</p>\n<p><strong>उत्तर</strong><strong>: E</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें</strong></p><p>A%B <span>का अर्थ है कि </span>A <span>के पास </span>B <span>से अधिक अनुभव है</span></p><p>A&amp;B <span>का अर्थ है </span>A <span>के पास </span>B <span>से कम अनुभव है</span></p><p>A$B <span>का अर्थ है </span>A, B <span>से बड़ा है</span></p><p>A@B <span>का अर्थ है </span>A, B <span>से छोटा है</span></p><p>! <span>मतलब नहीं</span></p><p>#<span>मतलब और</span></p><p>^ <span>मतलब जो/जिसका </span></p><p>+ <span>का मतलब केवल</span></p><p><strong>नोट:</strong><strong> </strong>अगर ! ऊपर वर्णित किसी भी प्रतीक के तत्काल पहले रखा गया है तो इसे नहीं केस माना जाएगा।</p><p>उदाहरण- A!&amp;B <span>का अर्थ है→</span> A <span>के पास </span>B <span>से कम अनुभव नहीं है</span></p><p>यदि ^ <span>ऊपर वर्णित किसी भी प्रतीक के तत्काल पहले रखा जाता है तो यह माना जाएगा कि जो/जिसका का केस है।</span></p><p>उदाहरण-A$B^@C →A, B <span>से बड़ा है जो </span>C <span>से छोटा है।</span></p><p>छह व्यक्तियों में- G, M, R, U, V, और X को अलग-अलग अनुभव हैं और वे अलग-अलग उम्र के हैं जैसे कि सबसे बड़ा सबसे अधिक अनुभवी नहीं है।</p><p><strong>कथन:</strong></p><p><strong>X % G ^&amp; M; V % U #&amp; G ^@ M ; R !&amp; X #$+ X; M @+ U; V !$ G; M !% X</strong></p><br><p><strong>यदि दूसरे सबसे कम अनुभवी व्यक्ति के पास छह वर्ष का अनुभव है और </strong><strong>M </strong><strong>के पास </strong><strong>V </strong><strong>का दोगुना अनुभव है</strong><strong>, </strong><strong>तो </strong><strong>G </strong><strong>का अनुभव क्या हो सकता है</strong><strong>?</strong></p>", "options": ["14", "10", "13", "5", "15"], "correctIndex": 1, "solution": "<p><strong>अंतिम व्यवस्था</strong></p><p><strong>अनुभव →</strong>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p><strong>आयु →</strong>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p>X % G ^&amp; M<strong>→ </strong>X के पास G से अधिक अनुभव है जिसके पास M से कम अनुभव है</p><p>M !% X<strong>→</strong> M के पास X से अधिक अनुभव नहीं है</p><p>X &gt; M &gt; G</p><p>V % U #&amp; G ^@ M <strong>→</strong> V के पास U से अधिक अनुभव है और उसके पास G से कम अनुभव है जो M से छोटा है</p><p>X &gt; M &gt; G &gt; V &gt; U</p><p>M &gt; G</p><p>R !&amp; X #$+ X<strong>→</strong> R के पास X से कम अनुभव नहीं है और केवल X से बड़ा है</p><p>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p>_ &gt; _ &gt; _ &gt; _ &gt; R &gt; X</p><p>M @+ U<strong>→</strong> M, केवल U से छोटा है</p><p>U &gt; M &gt; _ &gt; _ &gt; R &gt; X</p><p>V !$ G<strong>→</strong> V, G से बड़ा नहीं है</p><p>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p><strong>उत्तर: </strong><strong>B</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें</strong></p><p>A%B <span>का अर्थ है कि </span>A <span>के पास </span>B <span>से अधिक अनुभव है</span></p><p>A&amp;B <span>का अर्थ है </span>A <span>के पास </span>B <span>से कम अनुभव है</span></p><p>A$B <span>का अर्थ है </span>A, B <span>से बड़ा है</span></p><p>A@B <span>का अर्थ है </span>A, B <span>से छोटा है</span></p><p>! <span>मतलब नहीं</span></p><p>#<span>मतलब और</span></p><p>^ <span>मतलब जो/जिसका </span></p><p>+ <span>का मतलब केवल</span></p><p><strong>नोट:</strong><strong> </strong>अगर ! ऊपर वर्णित किसी भी प्रतीक के तत्काल पहले रखा गया है तो इसे नहीं केस माना जाएगा।</p><p>उदाहरण- A!&amp;B <span>का अर्थ है→</span> A <span>के पास </span>B <span>से कम अनुभव नहीं है</span></p><p>यदि ^ <span>ऊपर वर्णित किसी भी प्रतीक के तत्काल पहले रखा जाता है तो यह माना जाएगा कि जो/जिसका का केस है।</span></p><p>उदाहरण-A$B^@C →A, B <span>से बड़ा है जो </span>C <span>से छोटा है।</span></p><p>छह व्यक्तियों में- G, M, R, U, V, और X को अलग-अलग अनुभव हैं और वे अलग-अलग उम्र के हैं जैसे कि सबसे बड़ा सबसे अधिक अनुभवी नहीं है।</p><p><strong>कथन:</strong></p><p><strong>X % G ^&amp; M; V % U #&amp; G ^@ M ; R !&amp; X #$+ X; M @+ U; V !$ G; M !% X</strong></p><br><p><strong>निम्नलिखित में से कौन सबसे बड़ा व्यक्ति और सबसे अनुभवी व्यक्ति है</strong><strong>?</strong></p>", "options": ["GV", "XM", "RU", "UM", "GX"], "correctIndex": 2, "solution": "<p><strong>अंतिम व्यवस्था</strong></p><p><strong>अनुभव →</strong>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p><strong>आयु →</strong>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p>X % G ^&amp; M<strong>→ </strong>X के पास G से अधिक अनुभव है जिसके पास M से कम अनुभव है</p><p>M !% X<strong>→</strong> M के पास X से अधिक अनुभव नहीं है</p><p>X &gt; M &gt; G</p><p>V % U #&amp; G ^@ M <strong>→</strong> V के पास U से अधिक अनुभव है और उसके पास G से कम अनुभव है जो M से छोटा है</p><p>X &gt; M &gt; G &gt; V &gt; U</p><p>M &gt; G</p><p>R !&amp; X #$+ X<strong>→</strong> R के पास X से कम अनुभव नहीं है और केवल X से बड़ा है</p><p>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p>_ &gt; _ &gt; _ &gt; _ &gt; R &gt; X</p><p>M @+ U<strong>→</strong> M, केवल U से छोटा है</p><p>U &gt; M &gt; _ &gt; _ &gt; R &gt; X</p><p>V !$ G<strong>→</strong> V, G से बड़ा नहीं है</p><p>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p><strong>उत्तर: C</strong></p>"}, {"question": "<p><strong>निम्नलिखित जानकारी का ध्यानपूर्वक अध्ययन करें और नीचे दिए गए प्रश्नों के उत्तर दें</strong></p><p>A%B <span>का अर्थ है कि </span>A <span>के पास </span>B <span>से अधिक अनुभव है</span></p><p>A&amp;B <span>का अर्थ है </span>A <span>के पास </span>B <span>से कम अनुभव है</span></p><p>A$B <span>का अर्थ है </span>A, B <span>से बड़ा है</span></p><p>A@B <span>का अर्थ है </span>A, B <span>से छोटा है</span></p><p>! <span>मतलब नहीं</span></p><p>#<span>मतलब और</span></p><p>^ <span>मतलब जो/जिसका </span></p><p>+ <span>का मतलब केवल</span></p><p><strong>नोट:</strong><strong> </strong>अगर ! ऊपर वर्णित किसी भी प्रतीक के तत्काल पहले रखा गया है तो इसे नहीं केस माना जाएगा।</p><p>उदाहरण- A!&amp;B <span>का अर्थ है→</span> A <span>के पास </span>B <span>से कम अनुभव नहीं है</span></p><p>यदि ^ <span>ऊपर वर्णित किसी भी प्रतीक के तत्काल पहले रखा जाता है तो यह माना जाएगा कि जो/जिसका का केस है।</span></p><p>उदाहरण-A$B^@C →A, B <span>से बड़ा है जो </span>C <span>से छोटा है।</span></p><p>छह व्यक्तियों में- G, M, R, U, V, और X को अलग-अलग अनुभव हैं और वे अलग-अलग उम्र के हैं जैसे कि सबसे बड़ा सबसे अधिक अनुभवी नहीं है।</p><p><strong>कथन:</strong></p><p><strong>X % G ^&amp; M; V % U #&amp; G ^@ M ; R !&amp; X #$+ X; M @+ U; V !$ G; M !% X</strong></p><br><p><strong>निम्नलिखित में से कौन सा कथन सत्य है</strong><strong>?</strong></p><p><strong>I. </strong>R के पास M से अधिक अनुभव है</p><p><strong>II. </strong>V, M से छोटा है</p><p><strong>III. </strong>U सबसे छोटा है</p>", "options": ["केवल (II)", "केवल (I)", "केवल (II) और (III)", "केवल (I) और (II)", "सभी (I), (II), और (III)"], "correctIndex": 3, "solution": "<p><strong>अंतिम व्यवस्था</strong></p><p><strong>अनुभव →</strong>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p><strong>आयु →</strong>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p>X % G ^&amp; M<strong>→ </strong>X के पास G से अधिक अनुभव है जिसके पास M से कम अनुभव है</p><p>M !% X<strong>→</strong> M के पास X से अधिक अनुभव नहीं है</p><p>X &gt; M &gt; G</p><p>V % U #&amp; G ^@ M <strong>→</strong> V के पास U से अधिक अनुभव है और उसके पास G से कम अनुभव है जो M से छोटा है</p><p>X &gt; M &gt; G &gt; V &gt; U</p><p>M &gt; G</p><p>R !&amp; X #$+ X<strong>→</strong> R के पास X से कम अनुभव नहीं है और केवल X से बड़ा है</p><p>R &gt; X &gt; M &gt; G &gt; V &gt; U</p><p>_ &gt; _ &gt; _ &gt; _ &gt; R &gt; X</p><p>M @+ U<strong>→</strong> M, केवल U से छोटा है</p><p>U &gt; M &gt; _ &gt; _ &gt; R &gt; X</p><p>V !$ G<strong>→</strong> V, G से बड़ा नहीं है</p><p>U &gt; M &gt; G &gt; V &gt; R &gt; X</p><p><strong>उत्तर: D</strong></p>"}, {"question": "<p><strong>नीचे प्रत्येक प्रश्न में दो कथन </strong><strong>I </strong><strong>और </strong><strong>II </strong><strong>दिए गए हैं। ये कथन या तो स्वतंत्र कारण हो सकते हैं या स्वतंत्र कारणों या सामान्य कारण के प्रभाव हो सकते हैं। इनमें से एक कथन दूसरे कथन का प्रभाव हो सकता है। दोनों कथनों को पढ़ें और निर्णय लें कि निम्नलिखित में से कौन सा उत्तर विकल्प इन दोनों कथनों के बीच संबंध को सही ढंग से दर्शाता है।</strong></p><p><strong>जवाब दो,</strong></p><br><p><strong>कथन:</strong></p><p><strong>I</strong><strong>)</strong><strong>.</strong> सरकार ने व्यावसायिक पाठ्यक्रमों की फीस संरचना की जांच और संशोधन के लिए एक समिति का गठन किया है।</p><p><strong>II</strong><strong>). </strong>व्यावसायिक पाठ्यक्रमों में प्रवेश चाहने वाले इच्छुक छात्रों के माता-पिता ने व्यावसायिक संस्थानों द्वारा ली जाने वाली उच्च फीस का विरोध किया था और प्रवेश प्रक्रिया में काफी देरी हुई थी।</p>", "options": ["यदि कथन I कारण है और कथन II इसका प्रभाव है।", "यदि कथन II कारण है और कथन I इसका प्रभाव है।", "यदि कथन I और II दोनों स्वतंत्र कारण हैं।", "यदि कथन I और II दोनों स्वतंत्र कारणों के प्रभाव हैं।", "यदि कथन I और II दोनों का प्रभाव किसी सामान्य कारण पर पड़ता है।"], "correctIndex": 1, "solution": "<p><strong>उत्तर: </strong><strong>B</strong></p><p>चूँकि व्यावसायिक पाठ्यक्रमों में प्रवेश पाने के इच्छुक छात्रों के माता-पिता ने व्यावसायिक संस्थानों द्वारा ली जाने वाली उच्च फीस का विरोध किया था, इसलिए सरकार ने व्यावसायिक पाठ्यक्रमों की फीस संरचना की जाँच और संशोधन के लिए एक समिति का गठन किया है। तो, कथन II कारण है और कथन I प्रभाव है।</p>"}, {"question": "<p><strong>नीचे प्रत्येक प्रश्न में दो कथन </strong><strong>I </strong><strong>और </strong><strong>II </strong><strong>दिए गए हैं। ये कथन या तो स्वतंत्र कारण हो सकते हैं या स्वतंत्र कारणों या सामान्य कारण के प्रभाव हो सकते हैं। इनमें से एक कथन दूसरे कथन का प्रभाव हो सकता है। दोनों कथनों को पढ़ें और निर्णय लें कि निम्नलिखित में से कौन सा उत्तर विकल्प इन दोनों कथनों के बीच संबंध को सही ढंग से दर्शाता है।</strong></p><p><strong>जवाब दो,</strong></p><br><p><strong>कथन:</strong></p><p><strong>I</strong><strong>)</strong><strong>.</strong> पुलिस अधिकारियों ने हाल ही में इलाके में शाम के समय निगरानी बढ़ा दी है।</p><p><strong>II</strong><strong>). </strong>इलाके में छोटे-मोटे अपराध की घटनाओं में काफी कमी आयी है।</p>", "options": ["यदि कथन I कारण है और कथन II इसका प्रभाव है।", "यदि कथन II कारण है और कथन I इसका प्रभाव है।", "यदि कथन I और II दोनों स्वतंत्र कारण हैं।", "यदि कथन I और II दोनों स्वतंत्र कारणों के प्रभाव हैं।", "यदि कथन I और II दोनों का प्रभाव किसी सामान्य कारण पर पड़ता है।"], "correctIndex": 0, "solution": "<p><strong>उत्तर: </strong><strong>A</strong></p><p>चूंकि पुलिस अधिकारियों ने हाल ही में इलाके में शाम के समय चौकसी बढ़ा दी है, इसलिए छोटे-मोटे अपराधों की घटनाओं में काफी कमी आई है। तो, कथन I कारण है और कथन II प्रभाव है।</p>"}, {"question": "<p><strong>नीचे कथनों का एक सेट दिया गया है जो एक ही विषय पर आधारित है। दिए गए व्यक्तिगत निर्देशों के अनुसार प्रश्नों के उत्तर दें।</strong></p><br><p><strong>कथन: </strong>अमेज़ॅन के नर सफ़ेद बेलबर्ड की कॉल सबसे तेज़ रिकॉर्ड की गई है।</p><p><strong>तर्क:</strong></p><p><strong>I</strong><strong>)</strong><strong>.</strong> बेलबर्ड की आवाज़ 125 डेसिबल तक पहुंच सकती है, जो लगभग एक बहुत तेज़ रॉक कॉन्सर्ट जितनी तेज़ है, और चिल्लाने वाली पिहा (लिपौगसवोसिफ़ेरन्स) की सबसे तेज़ रिकॉर्ड की गई कॉल से 9 डेसिबल से अधिक है, जिसने दुनिया के सबसे तेज़ पक्षी होने का पिछला रिकॉर्ड बनाया था।</p><p><strong>II</strong><strong>).</strong> शोधकर्ताओं का कहना है कि मादा बेलबर्ड किसी शोर मचाने वाले नर के पास बैठी हो सकती है ताकि उसका करीब से आकलन किया जा सके। लेकिन ऐसा करने से उसकी सुनने की क्षमता ख़राब होने का ख़तरा क्यों है, यह स्पष्ट नहीं है।</p>", "options": ["यदि केवल तर्क I मजबूत है", "यदि केवल तर्क II मजबूत है", "यदि I या II में से कोई भी मजबूत है", "यदि I या II में से कोई भी मजबूत नहीं है", "यदि I और II दोनों मजबूत हैं"], "correctIndex": 0, "solution": "<p><strong>उत्तर: </strong><strong>A</strong></p><p>तर्क I कारण बताता है कि कैसे अमेज़ॅन के नर सफेद बेलबर्ड के बारे में कहा जाता है कि उसकी कॉल सबसे तेज़ रिकॉर्ड की जाती है। बेलबर्ड की आवाज़ 125 डेसिबल तक पहुंच सकती है, और चिल्लाने वाली पिहा की सबसे तेज़ रिकॉर्ड की गई आवाज़ से 9 डेसिबल से अधिक अधिक है, जिसने दुनिया के सबसे तेज़ पक्षी होने का पिछला रिकॉर्ड बनाया था। तर्क 2 मादा पक्षी के बारे में बताता है। तो, केवल तर्क I मजबूत है।</p>"}] 
+};
+
+
+
+let selectedLanguage = null;
+
+const HAS_ENGLISH = true;
+const HAS_HINDI = true;
+const TEST_DURATION_SECONDS = 1200;
+
+// Timer
+const timerLabel = document.getElementById('timer-label');
+let remainingSeconds = TEST_DURATION_SECONDS;
+
+// DOM elements
+const solutionsContainer = document.getElementById('solutions-container');
+
+const qProgress = document.getElementById('q-progress');
+const questionText = document.getElementById('question-text');
+const optionsContainer = document.getElementById('options-container');
+
+const clearBtn = document.getElementById('clear-btn');
+const markBtn = document.getElementById('mark-btn');
+const nextBtn = document.getElementById('next-btn');
+const submitBtn = document.getElementById('submit-btn');
+
+const paletteContainer = document.getElementById('palette-container');
+const solutionsList = document.getElementById('solutions-list');
+const solutionsBackBtn = document.getElementById('solutions-back-btn');
+
+const resultOverlay = document.getElementById('result-overlay');
+const metricMarks = document.getElementById('metric-marks');
+const metricCorrect = document.getElementById('metric-correct');
+const metricWrong = document.getElementById('metric-wrong');
+const metricAttempted = document.getElementById('metric-attempted');
+const viewSolutionsBtn = document.getElementById('view-solutions-btn');
+const homeBtn = document.getElementById('home-btn');
+
+const instTotalQuestions = document.getElementById('inst-total-questions');
+const instSideTotal = document.getElementById('inst-side-total');
+
+let questionStartTime = null;
+let questionTimes = [];
+let totalQuestions = 0;
+
+function formatTime(ms) {
+    const sec = Math.floor(ms / 1000);
+    return sec < 60 ? `${sec}s` : `${Math.floor(sec/60)}m ${sec % 60}s`;
+}
+
+// ===== TIMER FUNCTIONS =====
+function updateTimerLabel() {
+    const h = String(Math.floor(remainingSeconds / 3600)).padStart(2, '0');
+    const m = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(2, '0');
+    const s = String(remainingSeconds % 60).padStart(2, '0');
+    timerLabel.textContent = `Time: ${h}:${m}:${s}`;
+}
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+
+    updateTimerLabel();
+
+    timerInterval = setInterval(() => {
+        remainingSeconds--;
+
+        if (remainingSeconds <= 0) {
+            remainingSeconds = 0;
+            updateTimerLabel();
+            clearInterval(timerInterval);
+
+            // AUTO SUBMIT
+            if (questionStartTime !== null) {
+                questionTimes[currentIndex] +=
+                    (Date.now() - questionStartTime);
+            }
+            saveAnswerForCurrent();
+            showResultOverlay();
+            return;
+        }
+
+        updateTimerLabel();
+    }, 1000);
+}
+
+function pauseTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+// ===== RENDERING =====
+function renderQuestion(index) {
+	if (questionStartTime !== null) {
+    questionTimes[currentIndex] += (Date.now() - questionStartTime);
+	}
+	questionStartTime = Date.now();
+
+    const q = questions[index];
+    qProgress.textContent = `Question ${index + 1} of ${totalQuestions}`;
+    questionText.innerHTML = q.question;
+    optionsContainer.innerHTML = '';
+
+    q.options.forEach((optHtml, optIndex) => {
+        const label = document.createElement('label');
+        label.className = 'option';
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'option';
+        input.value = optIndex;
+
+        if (userAnswers[index] === optIndex) {
+            input.checked = true;
+        }
+
+        const span = document.createElement('div');
+        span.className = 'option-text';
+        span.innerHTML = optHtml;
+
+        label.appendChild(input);
+        label.appendChild(span);
+
+        label.addEventListener('click', () => {
+            input.checked = true;
+        });
+
+        optionsContainer.appendChild(label);
+    });
+
+    // If first visit, mark as notAnswered for palette
+    if (questionStates[index] === "notVisited") {
+        questionStates[index] = (userAnswers[index] != null) ? "answered" : "notAnswered";
+    }
+
+    updatePalette();
+    updateNextButtonState();
+}
+
+function updatePalette() {
+    paletteContainer.innerHTML = '';
+
+    const drawerContainer =
+        document.getElementById('palette-drawer-container');
+    if (drawerContainer) drawerContainer.innerHTML = '';
+
+    for (let i = 0; i < totalQuestions; i++) {
+
+        function createBtn() {
+            const btn = document.createElement('div');
+            let cls = 'palette-item';
+
+            if (questionStates[i] === 'notVisited') cls += ' state-notVisited';
+            else if (questionStates[i] === 'notAnswered') cls += ' state-notAnswered';
+            else if (questionStates[i] === 'answered') cls += ' state-answered';
+            else if (questionStates[i] === 'marked') cls += ' state-marked';
+
+            if (i === currentIndex) cls += ' current';
+
+            btn.className = cls;
+            btn.textContent = i + 1;
+
+            btn.addEventListener('click', () => {
+                saveAnswerForCurrent();
+                currentIndex = i;
+                renderQuestion(currentIndex);
+                closeDrawer(); // safe on desktop
+            });
+
+            return btn;
+        }
+
+        paletteContainer.appendChild(createBtn());
+        if (drawerContainer) drawerContainer.appendChild(createBtn());
+    }
+}
+
+function getSelectedOptionIndex() {
+    const selected = document.querySelector('input[name="option"]:checked');
+    if (!selected) return null;
+    return parseInt(selected.value, 10);
+}
+
+function saveAnswerForCurrent() {
+    const selIndex = getSelectedOptionIndex();
+    if (selIndex !== null) {
+        userAnswers[currentIndex] = selIndex;
+        questionStates[currentIndex] = "answered";
+    } else {
+        // Only change to notAnswered if not marked
+        if (questionStates[currentIndex] !== "marked") {
+            questionStates[currentIndex] = "notAnswered";
+        }
+    }
+    updatePalette();
+}
+
+// ===== RESULT & SOLUTIONS =====
+function showResultOverlay() {
+    let correct = 0;
+    let attempted = 0;
+
+    const MARKS_PER_Q = 1;
+    const NEGATIVE_MARKS = 0.25;
+    const totalQuestions = questions.length;
+    const maxMarks = totalQuestions * MARKS_PER_Q;
+    let totalMarks = 0;
+
+    questions.forEach((q, i) => {
+        const ans = userAnswers[i];
+        if (ans !== null && ans !== undefined) {
+            attempted++;
+            if (ans === q.correctIndex) {
+                correct++;
+                totalMarks += MARKS_PER_Q;
+            } else {
+                totalMarks -= NEGATIVE_MARKS;
+            }
+        }
+    });
+
+    const wrong = attempted - correct;
+	
+    const accuracy =
+        attempted > 0 ? ((correct / attempted) * 100).toFixed(2) : "0.00";
+
+    metricMarks.textContent =
+        `${totalMarks.toFixed(2)} / ${maxMarks.toFixed(2)}`;
+    metricCorrect.textContent = correct;
+    metricWrong.textContent = wrong;
+    metricAttempted.textContent = attempted;
+
+    
+    document.getElementById("metric-accuracy").textContent = accuracy + "%";
+    const avgTime =
+		totalQuestions > 0
+			? questionTimes.reduce((a, b) => a + b, 0) / totalQuestions
+			: 0;
+
+    metricMarks.textContent =
+        `${totalMarks.toFixed(2)} / ${maxMarks.toFixed(2)}`;
+    metricCorrect.textContent = correct;
+    metricWrong.textContent = wrong;
+    metricAttempted.textContent = attempted;
+    document.getElementById("metric-avgtime").textContent =
+        formatTime(avgTime);
+
+    resultOverlay.classList.remove("hidden");
+	resultOverlay.classList.add("show");
+
+}
+
+function closeResultOverlay() {
+    resultOverlay.classList.remove("show");
+    resultOverlay.classList.add("hidden");
+}
+
+function buildSolutionsView() {
+    solutionsList.innerHTML = '';
+    questions.forEach((q, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'solution-item';
+
+        const qDiv = document.createElement('div');
+        qDiv.className = 'solution-question';
+        qDiv.innerHTML = `<strong>Q${index + 1}.</strong> ${q.question}`;
+        wrapper.appendChild(qDiv);
+
+        const optsDiv = document.createElement('div');
+        optsDiv.className = 'solution-options';
+
+        q.options.forEach((optHtml, optIndex) => {
+            const optDiv = document.createElement('div');
+            let cls = 'solution-option';
+            if (optIndex === q.correctIndex) {
+                cls += ' correct';
+            } else if (userAnswers[index] === optIndex) {
+                cls += ' wrong';
+            }
+            optDiv.className = cls;
+
+            const labelSpan = document.createElement('div');
+            labelSpan.className = 'solution-label';
+            labelSpan.textContent = String.fromCharCode(65 + optIndex) + '.';
+
+            const textDiv = document.createElement('div');
+            textDiv.className = 'solution-text';
+            textDiv.innerHTML = optHtml;
+
+            optDiv.appendChild(labelSpan);
+            optDiv.appendChild(textDiv);
+            optsDiv.appendChild(optDiv);
+        });
+
+        wrapper.appendChild(optsDiv);
+
+        const solDiv = document.createElement('div');
+        solDiv.className = 'solution-explanation';
+        const solutionHtml = (q.solution || '')
+			.replace(/\\"/g, '"')      // unescape quotes
+			.replace(/\\n/g, '')       // remove escaped newlines
+			.replace(/\\t/g, '');      // remove escaped tabs
+
+		solDiv.innerHTML = `<strong>Solution:</strong><br>${solutionHtml}`;
+        wrapper.appendChild(solDiv);
+
+        solutionsList.appendChild(wrapper);
+    });
+}
+
+
+
+clearBtn.addEventListener('click', () => {
+    // Clear selection & mark as "notAnswered" (red)
+    userAnswers[currentIndex] = null;
+    questionStates[currentIndex] = "notAnswered";
+    renderQuestion(currentIndex);
+});
+
+markBtn.addEventListener('click', () => {
+    // Option 2: DO NOT save answer when marking for review
+    userAnswers[currentIndex] = null;
+    questionStates[currentIndex] = "marked";
+    if (currentIndex < totalQuestions - 1) {
+        currentIndex++;
+        renderQuestion(currentIndex);
+    } else {
+        // stay on last, just refresh colors
+        renderQuestion(currentIndex);
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    saveAnswerForCurrent();
+
+    if (currentIndex < totalQuestions - 1) {
+        currentIndex++;
+    }
+
+    renderQuestion(currentIndex);
+    updateNextButtonState();
+});
+
+submitBtn.addEventListener('click', () => {
+    const overlay = document.getElementById("submit-confirm-overlay");
+    if (!overlay) return;
+
+    // ⏸️ Pause timer
+    pauseTimer();
+
+    overlay.classList.remove("hidden");
+    overlay.classList.add("show");
+});
+
+// ===== HAMBURGER MENU LOGIC =====
+const menuBtn = document.getElementById('menu-btn');
+const drawer = document.getElementById('palette-drawer');
+const drawerOverlay = document.getElementById('drawer-overlay');
+
+function openDrawer() {
+    if (!drawer || !drawerOverlay) return;
+    drawer.classList.add('open');
+    drawerOverlay.classList.add('show');
+    document.body.classList.add('drawer-open');
+}
+
+function closeDrawer() {
+    if (!drawer || !drawerOverlay) return;
+    drawer.classList.remove('open');
+    drawerOverlay.classList.remove('show');
+    document.body.classList.remove('drawer-open');
+}
+
+if (menuBtn) {
+    menuBtn.addEventListener('click', openDrawer);
+}
+
+if (drawerOverlay) {
+    drawerOverlay.addEventListener('click', closeDrawer);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const startTestBtn = document.getElementById("start-test-btn");
+    const languageSelect = document.getElementById("languageSelect");
+    const languageWarning = document.getElementById("language-warning");
+
+    const instructionsContainer = document.getElementById("instructions-container");
+    const quizContainer = document.getElementById("quiz-container");
+    const quizHeader = document.getElementById("quiz-header");
+    const instructionHeader = document.getElementById("instruction-header");
+
+    /* ===== AUTO LANGUAGE HANDLING (ON LOAD) ===== */
+    if (HAS_ENGLISH && HAS_HINDI) {
+        languageSelect.disabled = false;
+        languageSelect.value = "";
+    } else if (HAS_ENGLISH) {
+        languageSelect.value = "en";
+        languageSelect.disabled = true;
+    } else if (HAS_HINDI) {
+        languageSelect.value = "hi";
+        languageSelect.disabled = true;
+    }
+
+    /* ===== START TEST ===== */
+    startTestBtn.addEventListener("click", () => {
+
+        selectedLanguage = languageSelect.value;
+
+        // If only one language exists → auto select
+        if (!selectedLanguage) {
+            if (HAS_ENGLISH && !HAS_HINDI) selectedLanguage = "en";
+            if (HAS_HINDI && !HAS_ENGLISH) selectedLanguage = "hi";
+        }
+
+        // Bilingual → must select
+        if (HAS_ENGLISH && HAS_HINDI && !selectedLanguage) {
+            languageWarning.classList.remove("hidden");
+            return;
+        }
+
+        languageWarning.classList.add("hidden");
+
+        questions = QUESTIONS_BY_LANGUAGE[selectedLanguage];
+
+        if (!questions || questions.length === 0) {
+            alert("No questions available for selected language");
+            return;
+        }
+
+        /* ===== RESET STATE ===== */
+        currentIndex = 0;
+        totalQuestions = questions.length;
+		instTotalQuestions.textContent = questions.length;
+		instSideTotal.textContent = questions.length;
+        userAnswers = new Array(totalQuestions).fill(null);
+        questionStates = new Array(totalQuestions).fill("notVisited");
+        questionTimes = new Array(totalQuestions).fill(0);
+		remainingSeconds = TEST_DURATION_SECONDS;
+
+        /* ===== SWITCH UI ===== */
+        instructionHeader.style.display = "none";
+        instructionsContainer.style.display = "none";
+
+        quizHeader.classList.remove("hidden");
+        quizHeader.classList.add("show");
+        quizContainer.style.display = "block";
+
+        startTimer();
+        renderQuestion(0);
+        updatePalette();
+		updateNextButtonState();
+    });
+	
+	/* ===== CONFIRM SUBMISSION HANDLERS ===== */
+	const cancelSubmitBtn = document.getElementById("cancel-submit-btn");
+	const confirmSubmitBtn = document.getElementById("confirm-submit-btn");
+
+	if (cancelSubmitBtn) {
+		cancelSubmitBtn.addEventListener("click", () => {
+			const overlay = document.getElementById("submit-confirm-overlay");
+			if (!overlay) return;
+
+			overlay.classList.remove("show");
+			overlay.classList.add("hidden");
+
+			// ▶️ Resume timer
+			startTimer();
+		});
+	}
+
+	if (confirmSubmitBtn) {
+		confirmSubmitBtn.addEventListener("click", () => {
+			const overlay = document.getElementById("submit-confirm-overlay");
+			if (!overlay) return;
+
+			overlay.classList.remove("show");
+			overlay.classList.add("hidden");
+
+			// finalize time for current question
+			if (questionStartTime !== null) {
+				questionTimes[currentIndex] += (Date.now() - questionStartTime);
+				questionStartTime = null;
+			}
+
+			pauseTimer();
+			saveAnswerForCurrent();
+			showResultOverlay();   // ✅ Quiz Summary opens
+		});
+	}
+	/* ===== RESULT OVERLAY BUTTONS ===== */
+	const viewSolutionsBtn = document.getElementById('view-solutions-btn');
+	const homeBtn = document.getElementById('home-btn');
+	const solutionsBackBtn = document.getElementById('solutions-back-btn');
+
+	if (viewSolutionsBtn) {
+		viewSolutionsBtn.addEventListener('click', () => {
+			resultOverlay.classList.remove("show");
+			resultOverlay.classList.add("hidden");
+
+			quizContainer.style.display = 'none';
+			solutionsContainer.style.display = 'block';
+
+			buildSolutionsView();
+			window.scrollTo(0, 0);
+		});
+	}
+
+	if (solutionsBackBtn) {
+		solutionsBackBtn.addEventListener('click', () => {
+			solutionsContainer.style.display = 'none';
+
+			resultOverlay.classList.remove("hidden");
+			resultOverlay.classList.add("show");
+
+			window.scrollTo(0, 0);
+		});
+	}
+
+	if (homeBtn) {
+		homeBtn.addEventListener('click', () => {
+			resultOverlay.classList.remove("show");
+			resultOverlay.classList.add("hidden");
+
+			solutionsContainer.style.display = 'none';
+			quizContainer.style.display = 'none';
+			instructionsContainer.style.display = 'block';
+
+			instructionHeader.style.display = 'block';
+			quizHeader.classList.remove("show");
+			quizHeader.classList.add("hidden");
+
+			currentIndex = 0;
+			userAnswers.fill(null);
+			questionStates.fill("notVisited");
+
+			clearInterval(timerInterval);
+			timerInterval = null;
+
+			window.scrollTo(0, 0);
+		});
+	}
+});
+
+function updateNextButtonState() {
+    const nextBtn = document.getElementById("next-btn");
+
+    if (currentIndex >= questions.length - 1) {
+        nextBtn.disabled = true;
+        nextBtn.style.opacity = "0.5";
+        nextBtn.style.cursor = "not-allowed";
+    } else {
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+        nextBtn.style.cursor = "pointer";
+    }
+}
+
+</script>
+<script>
+
+(function () {
+    function closePopup() {
+		const popup = document.getElementById("free-test-popup");
+		if (popup) popup.classList.add("hidden");
+	}
+
+
+    // expose globally for onclick
+    window.closeFreePopup = closePopup;
+})();
+</script>
+
+
+</div>
+<div class="overlay hidden" id="submit-confirm-overlay">
+    <div class="overlay-content">
+        <div class="overlay-header">
+            <h2>Confirm Submission</h2>
+        </div>
+        <div class="overlay-body">
+            Are you sure you want to submit the test?
+            <br>
+            You won’t be able to change your answers after submission.
+        </div>
+        <div class="overlay-footer">
+            <button class="btn btn-secondary" id="cancel-submit-btn">No</button>
+            <button class="btn btn-danger" id="confirm-submit-btn">Yes, Submit</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
