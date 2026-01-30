@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("tg") !== "1") {
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-family:Arial;
+          background:#f8fafc;
+          text-align:center;
+          padding:20px;">
+          <div style="
+            background:#fff;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.15);
+            max-width:380px;">
+            <h2>🚫 Test Locked</h2>
+            <p>This test is available only from our Telegram channel.</p>
+            <p style="font-size:13px;color:#666;">Please go back and click the Telegram link.</p>
+          </div>
+        </div>
+      `;
+    });
+  }
+})();
+</script>
+
 <meta charset="UTF-8" />
 <title>Mains Mastery Quiz 2026 Reasoning (Day-01) Quiz | MockTest</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1867,3 +1900,4 @@ function updateNextButtonState() {
 
 </body>
 </html>
+
